@@ -1,6 +1,6 @@
 name: Feature request
 description: Suggest an improvement to the Store, its spec format or sensor profiles
-labels: ['type/feature']
+labels: ['enhancement']
 body:
   - type: markdown
     attributes:

@@ -1,6 +1,6 @@
 name: Store problem
 description: Report a problem with the Store website, index.json, or the submission process
-labels: ['type/bug']
+labels: ['bug']
 body:
   - type: markdown
     attributes:
@@ -9,7 +9,7 @@ body:
 
         - **Wrong figures for a battery?** Use [Battery spec submission](https://github.com/Roving-Ronin/BatteryLedger-Store/issues/new?template=spec-submission.yml) with the battery's spec ID to submit a correction. That goes straight to review.
         - **Problem in Home Assistant** (setup, sensors, calculations)? Please report it on the [BatteryLedger integration](https://github.com/Roving-Ronin/BatteryLedger/issues/new/choose).
-        - Make sure no [similar issues (including closed ones)](https://github.com/Roving-Ronin/BatteryLedger-Store/issues?q=is%3Aissue+label%3Atype%2Fbug) exist.
+        - Make sure no [similar issues (including closed ones)](https://github.com/Roving-Ronin/BatteryLedger-Store/issues?q=is%3Aissue+label%3Abug) exist.
 
         Thanks for taking the time to help improve this project!
   - type: checkboxes
