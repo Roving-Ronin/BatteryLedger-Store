@@ -36,5 +36,5 @@ def test_template_rules():
 
 def test_energy_manager_brands_and_install_date():
     p = _profiles()["energy-manager"]
-    assert p["brands"] == ["Sigenergy", "AlphaESS", "Deye", "GoodWe", "Huawei", "iStore", "Sungrow"]
+    assert p["brands"] == ["Sigenergy", "AlphaESS", "BYD", "Deye", "Fronius", "GoodWe", "Huawei", "iStore", "Sungrow"]
     assert p["roles"]["install_date"][0]["platform"] == "input_datetime"

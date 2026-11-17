@@ -1,0 +1,46 @@
+{
+  "schema_version": 1,
+  "id": "fronius-modbus-redpomodoro",
+  "profile_version": 1,
+  "name": "Fronius Modbus (redpomodoro)",
+  "integration": {
+    "platform": "fronius_modbus",
+    "url": "https://github.com/redpomodoro/fronius_modbus"
+  },
+  "brands": [
+    "BYD",
+    "Fronius"
+  ],
+  "roles": {
+    "discharged_energy": [
+      {
+        "level": "plant",
+        "unique_id": "fm_mppt4_lfte",
+        "default_entity_ids": [
+          "sensor.fronius_<inverter_model>_storage_discharging_lifetime_energy"
+        ]
+      }
+    ],
+    "charged_energy": [
+      {
+        "level": "plant",
+        "unique_id": "fm_mppt3_lfte",
+        "default_entity_ids": [
+          "sensor.fronius_<inverter_model>_storage_charging_lifetime_energy"
+        ]
+      }
+    ],
+    "rated_capacity": [
+      {
+        "level": "plant",
+        "unique_id": "fm_WHRtg",
+        "default_entity_ids": [
+          "sensor.<battery_model>_capacity"
+        ]
+      }
+    ]
+  },
+  "submitted_by": "Roving-Ronin",
+  "verified": false,
+  "updated": "2026-11-18"
+}

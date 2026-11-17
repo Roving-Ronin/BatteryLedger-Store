@@ -1,0 +1,54 @@
+{
+  "schema_version": 1,
+  "id": "byd-battery-box-redpomodoro",
+  "profile_version": 1,
+  "name": "BYD Battery Box (redpomodoro)",
+  "integration": {
+    "platform": "byd_battery_box",
+    "url": "https://github.com/redpomodoro/byd_battery_box"
+  },
+  "brands": [
+    "BYD"
+  ],
+  "roles": {
+    "discharged_energy": [
+      {
+        "level": "plant",
+        "unique_id": "bydb_discharge_lfte",
+        "default_entity_ids": [
+          "sensor.battery_management_unit_discharge_total_energy"
+        ]
+      }
+    ],
+    "charged_energy": [
+      {
+        "level": "plant",
+        "unique_id": "bydb_charge_lfte",
+        "default_entity_ids": [
+          "sensor.battery_management_unit_charge_total_energy"
+        ]
+      }
+    ],
+    "rated_capacity": [
+      {
+        "level": "plant",
+        "unique_id": "bydb_capacity",
+        "default_entity_ids": [
+          "sensor.battery_management_unit_total_capacity"
+        ]
+      }
+    ],
+    "soh": [
+      {
+        "level": "plant",
+        "unique_id": "bydb_soh",
+        "default_entity_ids": [
+          "sensor.battery_management_unit_state_of_health"
+        ]
+      }
+    ]
+  },
+  "submitted_by": "Roving-Ronin",
+  "verified": false,
+  "updated": "2026-11-18"
+}

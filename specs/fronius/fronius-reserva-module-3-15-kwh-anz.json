@@ -1,0 +1,65 @@
+{
+  "schema_version": 1,
+  "id": "fronius-reserva-module-3-15-kwh-anz",
+  "spec_version": 1,
+  "brand": "Fronius",
+  "series": "Reserva",
+  "model": "Reserva module 3.15 kWh",
+  "regions": [
+    "AU",
+    "NZ"
+  ],
+  "chemistry": "LFP",
+  "phases": [
+    "1",
+    "3"
+  ],
+  "capacity": {
+    "unit": "module",
+    "nominal_kwh": 3.28,
+    "usable_kwh": 3.157,
+    "min_units": 2,
+    "max_units": 5
+  },
+  "warranty": {
+    "years": 10,
+    "eol_capacity_pct": 70,
+    "throughput": {
+      "basis": "unspecified",
+      "scope": "table",
+      "table": [
+        {
+          "units": 2,
+          "kwh": 19570
+        },
+        {
+          "units": 3,
+          "kwh": 29360
+        },
+        {
+          "units": 4,
+          "kwh": 39140
+        },
+        {
+          "units": 5,
+          "kwh": 48930
+        }
+      ]
+    },
+    "notes": "Australia and New Zealand (country group 3): 70% of usable energy (SOH) at 10 years or the energy throughput for the tower size, whichever comes first: Reserva 6.3 19.57 MWh, Reserva 9.5 29.36 MWh, Reserva 12.6 39.14 MWh, Reserva 15.8 48.93 MWh. The warranty doesn't say whether throughput is charged or discharged energy. Applies to purchases from 1 October 2026; the warranty period formally starts six months after delivery from Fronius (BatteryLedger counts from installation)."
+  },
+  "sources": [
+    {
+      "url": "https://www.fronius.com/en/~/downloads/Solar%20Energy/Terms%20of%20Warranties/SE_ToW_Battery_EN.pdf",
+      "title": "Fronius International Limited Warranty Conditions, Battery (EN_0326; country group 3: Australia, New Zealand)"
+    },
+    {
+      "url": "https://www.solarquotes.com.au/wp-content/uploads/2025/11/SE_Product_Documents_Datasheet_Fronius_Reserva_EN-AUS_EN-English.pdf",
+      "title": "Fronius Reserva datasheet (AU)"
+    }
+  ],
+  "notes": "High voltage, for Fronius GEN24 Plus: Reserva 6.3 to 15.8 (2-5 modules, 6.31-15.79 kWh usable, 94.5% depth of discharge) per tower; up to 4 towers in parallel, one BatteryLedger battery group per tower. Primo GEN24 Plus (single-phase) supports Reserva 6.3 and 9.5 only.",
+  "submitted_by": "Roving-Ronin",
+  "verified": false,
+  "updated": "2026-11-18"
+}

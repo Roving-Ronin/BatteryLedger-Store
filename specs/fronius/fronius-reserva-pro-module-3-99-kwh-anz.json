@@ -1,0 +1,68 @@
+{
+  "schema_version": 1,
+  "id": "fronius-reserva-pro-module-3-99-kwh-anz",
+  "spec_version": 1,
+  "brand": "Fronius",
+  "series": "Reserva Pro",
+  "model": "Reserva Pro module 3.99 kWh",
+  "regions": [
+    "AU",
+    "NZ"
+  ],
+  "chemistry": "LFP",
+  "phases": [
+    "3"
+  ],
+  "capacity": {
+    "unit": "module",
+    "nominal_kwh": 3.99,
+    "usable_kwh": 3.988,
+    "min_units": 3,
+    "max_units": 8
+  },
+  "warranty": {
+    "years": 10,
+    "eol_capacity_pct": 75,
+    "throughput": {
+      "basis": "unspecified",
+      "scope": "table",
+      "table": [
+        {
+          "units": 3,
+          "kwh": 44520
+        },
+        {
+          "units": 4,
+          "kwh": 59360
+        },
+        {
+          "units": 5,
+          "kwh": 74200
+        },
+        {
+          "units": 6,
+          "kwh": 89040
+        },
+        {
+          "units": 7,
+          "kwh": 103880
+        },
+        {
+          "units": 8,
+          "kwh": 118720
+        }
+      ]
+    },
+    "notes": "Australia and New Zealand (country group 3): 75% of usable energy (SOH) at 10 years or the energy throughput for the tower size, whichever comes first: Reserva Pro 12.0 44.52 MWh, Reserva Pro 16.0 59.36 MWh, Reserva Pro 20.0 74.2 MWh, Reserva Pro 24.0 89.04 MWh, Reserva Pro 28.0 103.88 MWh, Reserva Pro 32.0 118.72 MWh. The warranty doesn't say whether throughput is charged or discharged energy. Applies to purchases from 1 October 2026; the warranty period formally starts six months after delivery from Fronius (BatteryLedger counts from installation)."
+  },
+  "sources": [
+    {
+      "url": "https://www.fronius.com/en/~/downloads/Solar%20Energy/Terms%20of%20Warranties/SE_ToW_Battery_EN.pdf",
+      "title": "Fronius International Limited Warranty Conditions, Battery (EN_0326; country group 3: Australia, New Zealand)"
+    }
+  ],
+  "notes": "Reserva Pro 12.0 to 32.0: 11.96-31.91 kWh usable per tower, about 3.99 kWh per module (3-8 modules). Module count and phase are inferred from the warranty's tower sizes; check against the datasheet.",
+  "submitted_by": "Roving-Ronin",
+  "verified": false,
+  "updated": "2026-11-18"
+}
