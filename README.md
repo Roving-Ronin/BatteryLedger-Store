@@ -33,6 +33,8 @@ One JSON file per product and region group: `specs/<brand>/<id>.json`, validated
 |---|---|
 | `id` | `<brand>-<model>[-<variant>]-<region group>`, e.g. `sigenergy-sigenstor-bat-8-0-anz` |
 | `spec_version` | Starts at 1 and goes up with every approved change, so installs can spot revisions |
+| `series` | Model (product line) within the brand, e.g. `SigenStor` or `Neo`: the Model filter |
+| `model` | Battery module or unit, e.g. `SigenStor BAT 8.0` |
 | `regions` | Country codes (`AU`, `NZ`, ...) or `GLOBAL` |
 | `phases` | `["1"]`, `["3"]` or `["1", "3"]` |
 | `capacity.unit` | `module` (stackable; figures are per module) or `system` (all-in-one) |
@@ -81,5 +83,7 @@ Repository settings this needs:
 - **Actions:** Settings → Actions → General → Workflow permissions: allow *Read and write* and
   tick *Allow GitHub Actions to create and approve pull requests*.
 - **Labels:** `spec-submission` and `needs-changes`.
+- Issues opened without a template are closed automatically, and `/reopen` lets a reporter reopen their own
+  issue. Spec submissions are exempt; the submission Action handles them.
 - Pull requests opened by the submission Action don't trigger other workflows (a GitHub rule for
   `GITHUB_TOKEN`), which is why it validates the whole Store itself before opening one.

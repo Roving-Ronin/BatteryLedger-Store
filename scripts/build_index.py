@@ -7,6 +7,7 @@ Writes <output_dir>/index.json and copies the schema to <output_dir>/schema/.
 from __future__ import annotations
 
 import json
+import re
 import shutil
 import sys
 from datetime import datetime, timezone
@@ -15,6 +16,12 @@ from pathlib import Path
 from common import PROFILE_SCHEMA_PATH, SCHEMA_PATH, check_profile, check_spec, load_all_profiles, load_all_specs
 
 INDEX_FORMAT = 1
+
+
+def natural_key(text: str) -> list:
+    """Numbers compared by value, largest first: 'BAT 10.0' before 'BAT 8.0' before 'BAT 5.0'."""
+    return [(0, -float(part), "") if part.replace(".", "", 1).isdigit() else (1, 0.0, part.lower())
+            for part in re.split(r"(\d+(?:\.\d+)?)", text) if part]
 
 
 def build() -> dict:
@@ -31,7 +38,8 @@ def build() -> dict:
             raise SystemExit(f"{path}: refusing to publish invalid profile: {errors}")
         profiles.append(profile)
     profiles.sort(key=lambda p: p["name"].lower())
-    specs.sort(key=lambda s: (s["brand"].lower(), s["model"].lower(), s.get("variant", ""), s["id"]))
+    specs.sort(key=lambda s: (s["brand"].lower(), s.get("series", "").lower(),
+                              natural_key(s["model"]), s.get("variant", ""), s["id"]))
     return {
         "index_format": INDEX_FORMAT,
         "schema_version": 1,
@@ -39,6 +47,8 @@ def build() -> dict:
         "count": len(specs),
         "brands": sorted({s["brand"] for s in specs}, key=str.lower),
         "regions": sorted({r for s in specs for r in s["regions"]}),
+        "series": sorted({(s["brand"], s["series"]) for s in specs if s.get("series")},
+                         key=lambda x: (x[0].lower(), x[1].lower())),
         "specs": specs,
         "profiles": profiles,
     }

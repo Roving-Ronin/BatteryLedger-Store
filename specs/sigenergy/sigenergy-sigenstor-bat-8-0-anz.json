@@ -3,6 +3,7 @@
   "id": "sigenergy-sigenstor-bat-8-0-anz",
   "spec_version": 1,
   "brand": "Sigenergy",
+  "series": "SigenStor",
   "model": "SigenStor BAT 8.0",
   "regions": [
     "AU",

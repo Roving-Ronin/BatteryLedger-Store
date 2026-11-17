@@ -28,9 +28,19 @@ body:
       required: true
 
   - type: input
-    id: model
+    id: series
     attributes:
       label: Model
+      description: The product line, if the brand has more than one using different battery modules, e.g. SigenStor or Neo.
+      placeholder: SigenStor
+    validations:
+      required: false
+
+  - type: input
+    id: model
+    attributes:
+      label: Battery module
+      description: The battery module or unit as the manufacturer names it.
       placeholder: SigenStor BAT 8.0
     validations:
       required: true

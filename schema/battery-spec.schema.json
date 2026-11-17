@@ -40,7 +40,15 @@
       "maxLength": 64,
       "pattern": "^[^\\u0000-\\u001f]+$"
     },
+    "series": {
+      "description": "Model (product line) within the brand, e.g. SigenStor or Neo, shown as the Model filter. Lines that share a brand but use different battery modules.",
+      "type": "string",
+      "minLength": 1,
+      "maxLength": 64,
+      "pattern": "^[^\\u0000-\\u001f]+$"
+    },
     "model": {
+      "description": "Battery module or unit as the manufacturer names it, e.g. SigenStor BAT 8.0.",
       "type": "string",
       "minLength": 1,
       "maxLength": 96,

@@ -30,7 +30,8 @@ NO_RESPONSE = "_No response_"
 # Issue form labels (must match spec-submission.yml)
 L_SPEC_ID = "Existing spec ID (corrections only)"
 L_BRAND = "Brand"
-L_MODEL = "Model"
+L_SERIES = "Model"
+L_MODEL = "Battery module"
 L_VARIANT = "Variant"
 L_REGIONS = "Regions"
 L_CHEM = "Chemistry"
@@ -65,7 +66,7 @@ SCOPE = {
 UNIT = {"Stackable module": "module", "All-in-one system": "system"}
 
 # Keys a submitter may provide in the JSON route; the rest are set here.
-SUBMITTABLE = {"brand", "model", "variant", "regions", "chemistry", "phases",
+SUBMITTABLE = {"brand", "series", "model", "variant", "regions", "chemistry", "phases",
                "capacity", "warranty", "sources", "notes"}
 
 
@@ -112,6 +113,8 @@ def spec_from_form(sections: dict[str, str]) -> tuple[dict, str | None]:
         "regions": [r.strip().upper() for r in re.split(r"[,\s]+", req(L_REGIONS)) if r.strip()],
         "chemistry": req(L_CHEM),
     }
+    if sections.get(L_SERIES):
+        spec["series"] = sections[L_SERIES].strip()
     if sections.get(L_VARIANT):
         spec["variant"] = sections[L_VARIANT].strip()
 
@@ -194,7 +197,7 @@ def spec_from_json_block(body: str) -> tuple[dict, str | None]:
 
 
 def _order(spec: dict) -> dict:
-    keys = ["schema_version", "id", "spec_version", "brand", "model", "variant", "regions",
+    keys = ["schema_version", "id", "spec_version", "brand", "series", "model", "variant", "regions",
             "chemistry", "phases", "capacity", "warranty", "sources", "notes",
             "submitted_by", "verified", "updated"]
     return {k: spec[k] for k in keys if k in spec}

@@ -13,7 +13,7 @@
   h1 { margin:0 0 4px; font-size:26px; }
   header p { margin:0; color:var(--muted); }
   a { color:var(--accent); }
-  .filters { display:grid; grid-template-columns:2fr 1fr 1fr 1fr; gap:10px; margin:20px 0 12px; }
+  .filters { display:grid; grid-template-columns:2fr 1fr 1fr 1fr 1fr; gap:10px; margin:20px 0 12px; }
   input, select { width:100%; padding:9px 10px; border-radius:8px; border:1px solid var(--line); background:var(--card); color:var(--text); font:inherit; }
   .count { color:var(--muted); font-size:13px; margin-bottom:10px; }
   .grid { display:grid; grid-template-columns:repeat(auto-fill, minmax(320px, 1fr)); gap:12px; padding-bottom:40px; }
@@ -35,7 +35,7 @@
   .hint { color:var(--muted); margin:14px 0 0; }
   .roles { font-size:12px; margin:6px 0 0; padding-left:16px; }
   .roles code { word-break:break-all; }
-  @media (max-width:720px) { .filters { grid-template-columns:1fr 1fr; } }
+  @media (max-width:900px) { .filters { grid-template-columns:1fr 1fr; } }
 </style>
 </head>
 <body>
@@ -63,6 +63,7 @@
   <div class="filters">
     <input id="q" type="search" placeholder="Search brand or model…" aria-label="Search">
     <select id="brand" aria-label="Brand"><option value="">All brands</option></select>
+    <select id="series" aria-label="Model"><option value="">All models</option></select>
     <select id="region" aria-label="Region"><option value="">All regions</option></select>
     <select id="phase" aria-label="Phase">
       <option value="">Any phase</option>
@@ -79,7 +80,17 @@ const $ = (id) => document.getElementById(id);
 const esc = (s) => String(s ?? "").replace(/[&<>"']/g, (c) => ({"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;","'":"&#39;"}[c]));
 const fmt = (n) => Number(n).toLocaleString(undefined, { maximumFractionDigits: 2 });
 const BASIS = { charged: "charged energy", discharged: "discharged energy", unspecified: "not stated" };
-let specs = [], profiles = [];
+let specs = [], profiles = [], seriesList = [];
+
+// Model list follows the chosen brand (e.g. Sigenergy -> SigenStor, Neo)
+function fillSeries() {
+  const b = $("brand").value, keep = $("series").value, sel = $("series");
+  sel.length = 1;
+  for (const [brand, sr] of seriesList) {
+    if (!b || brand === b) sel.add(new Option(b ? sr : `${sr} (${brand})`, `${brand}|${sr}`));
+  }
+  sel.value = [...sel.options].some((o) => o.value === keep) ? keep : "";
+}
 const ROLE = {
   discharged_energy: "Lifetime discharged energy", charged_energy: "Lifetime charged energy",
   rated_capacity: "Rated capacity", soh: "State of health",
@@ -127,7 +138,7 @@ function card(s) {
   const phases = s.phases.map((p) => (p === "1" ? "Single phase" : "Three phase"));
   const srcs = s.sources.map((x) => `<a href="${esc(x.url)}" rel="noopener">${esc(x.title || "Source")}</a>`).join(" · ");
   return `<article class="card">
-    <div class="brand">${esc(s.brand)}</div>
+    <div class="brand">${esc(s.brand)}${s.series ? " · " + esc(s.series) : ""}</div>
     <h2>${esc(s.model)}${s.variant ? " " + esc(s.variant) : ""}</h2>
     <div class="tags">
       ${s.regions.map((r) => `<span class="tag">${esc(r)}</span>`).join("")}
@@ -148,11 +159,13 @@ function card(s) {
 
 function render() {
   const q = $("q").value.trim().toLowerCase(), b = $("brand").value, r = $("region").value, p = $("phase").value;
+  const sr = $("series").value;
   const hits = specs.filter((s) =>
     (!b || s.brand === b) &&
+    (!sr || `${s.brand}|${s.series ?? ""}` === sr) &&
     (!r || s.regions.includes(r) || s.regions.includes("GLOBAL")) &&
     (!p || s.phases.includes(p)) &&
-    (!q || `${s.brand} ${s.model} ${s.variant ?? ""} ${s.id}`.toLowerCase().includes(q)));
+    (!q || `${s.brand} ${s.series ?? ""} ${s.model} ${s.variant ?? ""} ${s.id}`.toLowerCase().includes(q)));
   $("count").textContent = `${hits.length} of ${specs.length} batteries`;
   $("grid").innerHTML = hits.map(card).join("");
 }
@@ -163,7 +176,10 @@ fetch("index.json", { cache: "no-cache" })
     specs = idx.specs;
     for (const x of idx.brands) $("brand").add(new Option(x, x));
     for (const x of idx.regions) $("region").add(new Option(x, x));
-    ["q", "brand", "region", "phase"].forEach((id) => $(id).addEventListener("input", render));
+    seriesList = idx.series ?? [];
+    fillSeries();
+    $("brand").addEventListener("input", () => { fillSeries(); render(); });
+    ["q", "series", "region", "phase"].forEach((id) => $(id).addEventListener("input", render));
     render();
     profiles = idx.profiles ?? [];
     for (const x of [...new Set(profiles.flatMap((p) => p.brands))].sort()) $("pbrand").add(new Option(x, x));

@@ -21,6 +21,10 @@ Acme Energy
 
 ### Model
 
+PowerStack
+
+### Battery module
+
 PowerStack 5
 
 ### Variant
@@ -127,6 +131,7 @@ def test_form_new_spec(store):
     assert result["spec_id"] == "acme-energy-powerstack-5-anz"
     spec = json.loads((store / "acme-energy" / "acme-energy-powerstack-5-anz.json").read_text())
     assert spec["phases"] == ["1"]
+    assert spec["series"] == "PowerStack"
     assert spec["regions"] == ["AU", "NZ"]
     assert spec["warranty"]["throughput"]["table"] == [
         {"units": 2, "kwh": 28000.0}, {"units": 3, "kwh": 42000.0}]
