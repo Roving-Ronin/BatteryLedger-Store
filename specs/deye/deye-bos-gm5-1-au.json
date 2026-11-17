@@ -1,0 +1,87 @@
+{
+  "schema_version": 1,
+  "id": "deye-bos-gm5-1-au",
+  "spec_version": 1,
+  "brand": "Deye",
+  "series": "BOS-G",
+  "model": "BOS-GM5.1",
+  "regions": [
+    "AU"
+  ],
+  "chemistry": "LFP",
+  "phases": [
+    "3"
+  ],
+  "capacity": {
+    "unit": "module",
+    "nominal_kwh": 5.12,
+    "usable_kwh": 4.61,
+    "min_units": 3,
+    "max_units": 12
+  },
+  "warranty": {
+    "years": 10,
+    "eol_capacity_pct": 70,
+    "throughput": {
+      "basis": "discharged",
+      "scope": "table",
+      "table": [
+        {
+          "units": 3,
+          "kwh": 49050
+        },
+        {
+          "units": 4,
+          "kwh": 65400
+        },
+        {
+          "units": 5,
+          "kwh": 81700
+        },
+        {
+          "units": 6,
+          "kwh": 98100
+        },
+        {
+          "units": 7,
+          "kwh": 114400
+        },
+        {
+          "units": 8,
+          "kwh": 130700
+        },
+        {
+          "units": 9,
+          "kwh": 147100
+        },
+        {
+          "units": 10,
+          "kwh": 163400
+        },
+        {
+          "units": 11,
+          "kwh": 179800
+        },
+        {
+          "units": 12,
+          "kwh": 196150
+        }
+      ]
+    },
+    "notes": "70% of system energy at 10 years or the Minimum Throughput Energy, whichever comes first. Minimum Throughput Energy per system size, BOS-G15 (3 modules) to BOS-G60 (12 modules). Throughput is the battery's total output (discharged) energy recorded by its control module, from the warranty start date (the earlier of installation or six months after production)."
+  },
+  "sources": [
+    {
+      "url": "https://au.deyeinverter.com/deyeinverter/2026/01/14/WarrantyBOS-G.pdf",
+      "title": "Deye BOS-G limited warranty (Australia)"
+    },
+    {
+      "url": "https://au.deyeinverter.com/deyeinverter/2026/01/14/DeyeBOS-GSeries_Brochure20251119-AU_V1.0.pdf",
+      "title": "Deye BOS-G brochure (AU), 2025-11-19"
+    }
+  ],
+  "notes": "High-voltage rack system: 3-12 BOS-GM5.1 modules of 5.12 kWh in series (BOS-G15 to BOS-G60) with an HVB750V control box. Usable 4.61 kWh per module at 90% depth of discharge (61.44 kWh system: 55.29 kWh usable).",
+  "submitted_by": "Roving-Ronin",
+  "verified": false,
+  "updated": "2026-11-18"
+}

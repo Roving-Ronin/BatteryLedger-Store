@@ -1,0 +1,43 @@
+{
+  "schema_version": 1,
+  "id": "deye-rw-f10-2-au",
+  "spec_version": 1,
+  "brand": "Deye",
+  "series": "RW",
+  "model": "RW-F10.2",
+  "regions": [
+    "AU"
+  ],
+  "chemistry": "LFP",
+  "phases": [
+    "1",
+    "3"
+  ],
+  "capacity": {
+    "unit": "module",
+    "nominal_kwh": 10.24,
+    "usable_kwh": 10.24,
+    "min_units": 1,
+    "max_units": 32
+  },
+  "warranty": {
+    "years": 10,
+    "eol_capacity_pct": 70,
+    "throughput": {
+      "basis": "discharged",
+      "scope": "per_unit",
+      "kwh": 32000
+    },
+    "notes": "70% of usable energy at 10 years or the Minimum Throughput Energy, whichever comes first. 32 MWh per 10.24 kWh module. Throughput is the battery's total output (discharged) energy recorded by its control module, from the warranty start date (the earlier of installation or six months after production)."
+  },
+  "sources": [
+    {
+      "url": "https://solarproof.com.au/warranty_documents/battery_warranty_Warranty-V1.1-RW-F10.2-AU.pdf",
+      "title": "Deye RW-F10.2 limited warranty V1.1 (Australia)"
+    }
+  ],
+  "notes": "Low-voltage module, 10.24 kWh. The warranty table gives 10.24 kWh usable; datasheets give 9.2 kWh at 90% depth of discharge. Maximum in parallel (32) is from the North American RW-F10.2-B; not confirmed for Australia.",
+  "submitted_by": "Roving-Ronin",
+  "verified": false,
+  "updated": "2026-11-18"
+}

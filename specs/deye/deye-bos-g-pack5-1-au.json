@@ -1,0 +1,99 @@
+{
+  "schema_version": 1,
+  "id": "deye-bos-g-pack5-1-au",
+  "spec_version": 1,
+  "brand": "Deye",
+  "series": "BOS-G Pro",
+  "model": "BOS-G-Pack5.1",
+  "regions": [
+    "AU"
+  ],
+  "chemistry": "LFP",
+  "phases": [
+    "3"
+  ],
+  "capacity": {
+    "unit": "module",
+    "nominal_kwh": 5.12,
+    "usable_kwh": 5.12,
+    "min_units": 5,
+    "max_units": 17
+  },
+  "warranty": {
+    "years": 10,
+    "eol_capacity_pct": 70,
+    "throughput": {
+      "basis": "discharged",
+      "scope": "table",
+      "table": [
+        {
+          "units": 5,
+          "kwh": 84000
+        },
+        {
+          "units": 6,
+          "kwh": 100000
+        },
+        {
+          "units": 7,
+          "kwh": 116000
+        },
+        {
+          "units": 8,
+          "kwh": 132000
+        },
+        {
+          "units": 9,
+          "kwh": 148000
+        },
+        {
+          "units": 10,
+          "kwh": 164000
+        },
+        {
+          "units": 11,
+          "kwh": 180000
+        },
+        {
+          "units": 12,
+          "kwh": 196000
+        },
+        {
+          "units": 13,
+          "kwh": 212000
+        },
+        {
+          "units": 14,
+          "kwh": 228000
+        },
+        {
+          "units": 15,
+          "kwh": 244000
+        },
+        {
+          "units": 16,
+          "kwh": 260000
+        },
+        {
+          "units": 17,
+          "kwh": 276000
+        }
+      ]
+    },
+    "notes": "70% of usable energy at 10 years or the Minimum Throughput Energy, whichever comes first. Minimum Throughput Energy per system size, BOS-G25-Pro (5 modules, 84 MWh) to BOS-G85-Pro (17 modules, 276 MWh). Throughput is the battery's total output (discharged) energy recorded by its control module, from the warranty start date (the earlier of installation or six months after production)."
+  },
+  "sources": [
+    {
+      "url": "https://au.deyeinverter.com/deyeinverter/2026/01/14/Warrantydocument_BOS-G-Pro002.pdf",
+      "title": "Deye BOS-G Pro limited warranty (Australia)"
+    },
+    {
+      "url": "https://deye.com/wp-content/uploads/2026/07/deye-bos-g-pro-series_brochure-_au_20260414v1.0.pdf",
+      "title": "Deye BOS-G Pro brochure (AU), 2026-04-14"
+    }
+  ],
+  "notes": "High-voltage rack system: 5-17 BOS-G-Pack5.1 modules of 5.12 kWh in series (BOS-G25-Pro to BOS-G85-Pro). The AU brochure gives system usable energy equal to system energy.",
+  "submitted_by": "Roving-Ronin",
+  "verified": false,
+  "updated": "2026-11-18"
+}

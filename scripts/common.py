@@ -16,7 +16,7 @@ SPECS_DIR = ROOT / "specs"
 SCHEMA_PATH = ROOT / "schema" / "battery-spec.schema.json"
 PROFILES_DIR = ROOT / "profiles"
 PROFILE_SCHEMA_PATH = ROOT / "schema" / "sensor-profile.schema.json"
-PLACEHOLDER_RE = re.compile(r"\{(entry|device|prefix|plant|inverter|station|serial)\}")
+PLACEHOLDER_RE = re.compile(r"\{(entry|device|prefix|plant|inverter|station|serial|mac)\}")
 
 
 def slugify(text: str) -> str:

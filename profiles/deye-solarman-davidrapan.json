@@ -1,0 +1,36 @@
+{
+  "schema_version": 1,
+  "id": "deye-solarman-davidrapan",
+  "profile_version": 1,
+  "name": "Solarman (davidrapan) for Deye",
+  "integration": {
+    "platform": "solarman",
+    "url": "https://github.com/davidrapan/ha-solarman"
+  },
+  "brands": [
+    "Deye"
+  ],
+  "roles": {
+    "discharged_energy": [
+      {
+        "level": "plant",
+        "unique_id": "{entry}_total_battery_discharge_sensor",
+        "default_entity_ids": [
+          "sensor.inverter_total_battery_discharge"
+        ]
+      }
+    ],
+    "charged_energy": [
+      {
+        "level": "plant",
+        "unique_id": "{entry}_total_battery_charge_sensor",
+        "default_entity_ids": [
+          "sensor.inverter_total_battery_charge"
+        ]
+      }
+    ]
+  },
+  "submitted_by": "Roving-Ronin",
+  "verified": false,
+  "updated": "2026-11-18"
+}

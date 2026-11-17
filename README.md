@@ -64,7 +64,7 @@ Roles: `discharged_energy`, `charged_energy`, `rated_capacity`, `soh`, and per-m
 
 Templates use placeholders for the parts that differ between installs, so no profile ever contains a
 setup ID, station ID or serial number: `{entry}`, `{device}`, `{prefix}`, `{plant}`, `{inverter}`,
-`{station}`, `{serial}`. Module templates must contain `{serial}`.
+`{station}`, `{serial}`, `{mac}` (an ESPHome device's MAC address). Module templates must contain `{serial}`.
 
 Seeded profiles: TypQxQ's [Sigenergy Local Modbus](https://github.com/TypQxQ/Sigenergy-Local-Modbus)
 (`sigen`) and [sigenergy2mqtt](https://github.com/seud0nym/sigenergy2mqtt) (`mqtt`, including the optional

@@ -1,0 +1,36 @@
+{
+  "schema_version": 1,
+  "id": "deye-esphome-lewa-reka",
+  "profile_version": 1,
+  "name": "ESPHome Deye Inverter (Lewa-Reka)",
+  "integration": {
+    "platform": "esphome",
+    "url": "https://github.com/Lewa-Reka/esphome-deye-inverter"
+  },
+  "brands": [
+    "Deye"
+  ],
+  "roles": {
+    "discharged_energy": [
+      {
+        "level": "plant",
+        "unique_id": "{mac}-sensor-total_battery_discharge",
+        "default_entity_ids": [
+          "sensor.deye_inverter_<mac_suffix>_total_battery_discharge"
+        ]
+      }
+    ],
+    "charged_energy": [
+      {
+        "level": "plant",
+        "unique_id": "{mac}-sensor-total_battery_charge",
+        "default_entity_ids": [
+          "sensor.deye_inverter_<mac_suffix>_total_battery_charge"
+        ]
+      }
+    ]
+  },
+  "submitted_by": "Roving-Ronin",
+  "verified": false,
+  "updated": "2026-11-18"
+}

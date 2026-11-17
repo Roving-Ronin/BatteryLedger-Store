@@ -123,11 +123,11 @@
   },
   "$defs": {
     "template": {
-      "description": "unique_id template. Placeholders for parts that differ between installs: {entry} {device} {prefix} {plant} {inverter} {station} {serial}. An integration with fixed unique IDs needs none. Everything else is literal.",
+      "description": "unique_id template. Placeholders for parts that differ between installs: {entry} {device} {prefix} {plant} {inverter} {station} {serial} {mac}. An integration with fixed unique IDs needs none. Everything else is literal.",
       "type": "string",
       "minLength": 3,
       "maxLength": 200,
-      "pattern": "^([A-Za-z0-9_.:-]|\\{(entry|device|prefix|plant|inverter|station|serial)\\})+$"
+      "pattern": "^([A-Za-z0-9_.:-]|\\{(entry|device|prefix|plant|inverter|station|serial|mac)\\})+$"
     },
     "system_rules": {
       "description": "Matching rules in order of preference.",
