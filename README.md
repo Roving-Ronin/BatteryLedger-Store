@@ -1,5 +1,7 @@
 <p align="center"><img src="images/banner-store.png" alt="BatteryLedger: ESS Health &amp; Asset Tracking by Roving-Ronin" width="607"></p>
 
+##
+
 Community library of home battery specifications and warranty terms, used by the
 [BatteryLedger](https://github.com/Roving-Ronin/BatteryLedger) Home Assistant integration.
 
