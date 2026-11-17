@@ -1,14 +1,17 @@
 {
   "schema_version": 1,
   "id": "energy-manager",
-  "profile_version": 1,
+  "profile_version": 2,
   "name": "Energy Manager",
   "integration": {
     "platform": "mqtt",
     "url": "https://github.com/ha-energymanager/ha-energymanager"
   },
   "brands": [
-    "*"
+    "Sigenergy",
+    "Huawei",
+    "iStore",
+    "Sungrow"
   ],
   "roles": {
     "discharged_energy": [

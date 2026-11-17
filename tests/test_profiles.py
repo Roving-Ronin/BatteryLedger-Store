@@ -34,7 +34,7 @@ def test_template_rules():
     assert common.check_profile(p)
 
 
-def test_energy_manager_any_brand_and_install_date():
+def test_energy_manager_brands_and_install_date():
     p = _profiles()["energy-manager"]
-    assert p["brands"] == ["*"]
+    assert p["brands"] == ["Sigenergy", "Huawei", "iStore", "Sungrow"]
     assert p["roles"]["install_date"][0]["platform"] == "input_datetime"

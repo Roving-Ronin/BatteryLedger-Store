@@ -35,6 +35,9 @@ python -m pytest -q tests
 - Field naming: `series` is shown to users as **Model** (product line, e.g. SigenStor, Neo); `model` is
   shown as **Battery module** (e.g. SigenStor BAT 8.0).
 - Specs sort brand → model line → battery module, numbers largest first (`build_index.natural_key`).
+- Sensor profiles list their brands explicitly (no wildcard). An integration for several brands (Energy
+  Manager) lists each one and must be updated when a brand is added. On the site, Sigenergy comes first,
+  then the other brands alphabetically; profiles offered for every brand come last.
 - Submissions: `issue_to_spec.py` parses the issue form by **label text** and the integration's JSON
   block after `<!-- batteryledger-spec -->`. Changing a form label means changing the parser constant
   and its test. The issue body is untrusted input: pass it via environment variables, never interpolate

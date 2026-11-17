@@ -104,7 +104,15 @@ const ROLE = {
 };
 
 const LEVEL = { plant: "Plant", inverter: "Inverter", module: "Each battery module" };
-const brandsText = (p) => p.brands.includes("*") ? "Any battery brand" : p.brands.map(esc).join(", ");
+// Sigenergy first, then the other brands alphabetically.
+const brandCmp = (a, b) => (b === "Sigenergy") - (a === "Sigenergy") || a.localeCompare(b, undefined, { sensitivity: "base" });
+const sortBrands = (list) => [...list].sort(brandCmp);
+const brandsText = (p) => sortBrands(p.brands).map(esc).join(", ");
+// Profiles grouped by brand, then the ones offered for every brand (e.g. Energy Manager).
+let allBrands = [];
+const forEveryBrand = (p) => allBrands.length > 1 && allBrands.every((x) => p.brands.includes(x));
+const profileCmp = (a, b) => forEveryBrand(a) - forEveryBrand(b) ||
+  brandCmp(sortBrands(a.brands)[0], sortBrands(b.brands)[0]) || a.name.localeCompare(b.name);
 
 // Entity IDs the integration creates by default; the unique-ID templates used for matching aren't shown.
 function profileCard(p) {
@@ -130,7 +138,7 @@ function profileCard(p) {
 
 function renderProfiles() {
   const b = $("pbrand").value, i = $("pintegration").value;
-  const hits = profiles.filter((p) => (!b || p.brands.includes(b) || p.brands.includes("*")) && (!i || p.id === i));
+  const hits = profiles.filter((p) => (!b || p.brands.includes(b)) && (!i || p.id === i));
   $("pcount").textContent = `${hits.length} of ${profiles.length} sensor profiles`;
   $("pgrid").innerHTML = hits.map(profileCard).join("");
 }
@@ -197,9 +205,9 @@ fetch("index.json", { cache: "no-cache" })
     ["q", "series", "region", "phase"].forEach((id) => $(id).addEventListener("input", render));
     render();
     profiles = idx.profiles ?? [];
-    // Every brand in the Store: "*" profiles (e.g. Energy Manager) apply to all of them.
-    for (const x of [...new Set([...idx.brands, ...profiles.flatMap((p) => p.brands)].filter((b) => b !== "*"))].sort())
-      $("pbrand").add(new Option(x, x));
+    allBrands = sortBrands(new Set(profiles.flatMap((p) => p.brands)));
+    profiles = profiles.slice().sort(profileCmp);
+    for (const x of allBrands) $("pbrand").add(new Option(x, x));
     for (const p of profiles) $("pintegration").add(new Option(p.name, p.id));
     ["pbrand", "pintegration"].forEach((id) => $(id).addEventListener("input", renderProfiles));
     renderProfiles();

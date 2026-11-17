@@ -57,7 +57,7 @@
       }
     },
     "brands": {
-      "description": "Battery brands (as used in specs) this profile applies to, or \"*\" for an integration that works with any brand (e.g. a translation layer such as Energy Manager).",
+      "description": "Battery brands (as used in specs) this profile applies to. An integration that works with several brands (e.g. Energy Manager) lists each of them.",
       "type": "array",
       "minItems": 1,
       "uniqueItems": true,
