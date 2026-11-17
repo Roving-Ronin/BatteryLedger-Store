@@ -1,0 +1,50 @@
+{
+  "schema_version": 1,
+  "id": "sigenergy-sigenstor-neo-bat-8-0-anz",
+  "spec_version": 1,
+  "brand": "Sigenergy",
+  "series": "SigenStor Neo",
+  "model": "SigenStor Neo BAT 8.0",
+  "regions": [
+    "AU",
+    "NZ"
+  ],
+  "chemistry": "LFP",
+  "phases": [
+    "1",
+    "3"
+  ],
+  "capacity": {
+    "unit": "module",
+    "nominal_kwh": 7.52,
+    "usable_kwh": 7.3,
+    "reported_kwh": 7.52,
+    "min_units": 1,
+    "max_units": 6
+  },
+  "warranty": {
+    "years": 10,
+    "eol_capacity_pct": 70,
+    "throughput": {
+      "basis": "discharged",
+      "scope": "per_unit",
+      "kwh": 22240
+    },
+    "notes": "70% of usable energy at 10 years or the Minimum Throughput Energy, whichever comes first. Throughput is counted as discharged energy, recorded by the battery from the warranty start date. No Australian Neo warranty found yet: 22.24 MWh is estimated as 7.30 kWh usable x 3.046 MWh per usable kWh, the rate of every SigenStor module in the Australian warranty (Europe gives 25.55 MWh at 60%)."
+  },
+  "sources": [
+    {
+      "url": "https://www.sigenergy.com/au/support/warranty",
+      "title": "Sigenergy Australia warranty information"
+    },
+    {
+      "url": "https://wwwstatic.sigenergy.com/upload/2026-10-08/1791444724081_5a5da089-af38-40bf-b106-b79fb75b7a11.pdf",
+      "title": "Factory Limited Warranty for SigenStor (Europe)",
+      "date": "2026-07-11"
+    }
+  ],
+  "notes": "SigenStor Neo: 1-6 battery modules per energy controller; 6.0 and 8.0 modules can be mixed. Usable energy from Sigenergy's Europe warranty (Neo BAT 6.0 5.84 kWh, Neo BAT 8.0 7.30 kWh).",
+  "submitted_by": "Roving-Ronin",
+  "verified": false,
+  "updated": "2026-11-18"
+}
