@@ -1,0 +1,52 @@
+name: Feature request
+description: Suggest an improvement to the Store, its spec format or sensor profiles
+labels: ['type/feature']
+body:
+  - type: markdown
+    attributes:
+      value: |
+        Thanks for taking the time to help improve this project!
+
+        To **add a battery**, use [Battery spec submission](https://github.com/Roving-Ronin/BatteryLedger-Store/issues/new?template=spec-submission.yml) instead.
+        To ask for **another inverter integration**, choose *Sensor profile for an integration* below and link the integration's repo.
+  - type: checkboxes
+    attributes:
+      label: Is there an existing issue for this?
+      description: Please search to see if an issue already exists for the feature you are requesting.
+      options:
+        - label: I have searched the existing issues
+          required: true
+  - type: dropdown
+    id: area
+    attributes:
+      label: Which part?
+      options:
+        - Battery spec format (new fields, warranty terms that can't be expressed)
+        - Sensor profile for an integration
+        - Store website
+        - Submission process
+        - Other
+    validations:
+      required: true
+  - type: textarea
+    id: current-behavior
+    attributes:
+      label: Current Behaviour
+      description: What the Store does or can describe now.
+      placeholder: Tell us what you see!
+    validations:
+      required: true
+  - type: textarea
+    id: expected-behaviour
+    attributes:
+      label: Desired Behaviour
+      description: What you would like it to do. For warranty terms, a link to the warranty document helps a lot.
+      placeholder: Tell us what you would like to see!
+    validations:
+      required: true
+  - type: textarea
+    attributes:
+      label: Context / Reason
+      description: Providing context helps us come up with a solution that is most useful in the real world.
+    validations:
+      required: true

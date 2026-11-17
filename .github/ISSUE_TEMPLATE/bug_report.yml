@@ -1,0 +1,63 @@
+name: Store problem
+description: Report a problem with the Store website, index.json, or the submission process
+labels: ['type/bug']
+body:
+  - type: markdown
+    attributes:
+      value: |
+        **NOTE:** Before you start, please check the following.
+
+        - **Wrong figures for a battery?** Use [Battery spec submission](https://github.com/Roving-Ronin/BatteryLedger-Store/issues/new?template=spec-submission.yml) with the battery's spec ID to submit a correction. That goes straight to review.
+        - **Problem in Home Assistant** (setup, sensors, calculations)? Please report it on the [BatteryLedger integration](https://github.com/Roving-Ronin/BatteryLedger/issues/new/choose).
+        - Make sure no [similar issues (including closed ones)](https://github.com/Roving-Ronin/BatteryLedger-Store/issues?q=is%3Aissue+label%3Atype%2Fbug) exist.
+
+        Thanks for taking the time to help improve this project!
+  - type: checkboxes
+    attributes:
+      label: Is there an existing issue for this?
+      description: Please search to see if an issue already exists for the bug you encountered.
+      options:
+        - label: I have searched the existing issues
+          required: true
+  - type: dropdown
+    id: area
+    attributes:
+      label: Which part?
+      options:
+        - Store website
+        - index.json
+        - Spec submission (issue form / automatic pull request)
+        - Sensor profile
+        - Other / Not sure
+    validations:
+      required: true
+  - type: textarea
+    id: current-behavior
+    attributes:
+      label: Current Behaviour
+      description: A concise description of what you're experiencing. Screenshots and links to the issue or workflow run are very helpful.
+      placeholder: Tell us what you see!
+    validations:
+      required: true
+  - type: textarea
+    id: expected-behaviour
+    attributes:
+      label: Expected Behaviour
+      description: A concise description of what you expected to happen.
+      placeholder: Tell us what you should see!
+    validations:
+      required: true
+  - type: input
+    id: ids
+    attributes:
+      label: Spec or profile ID
+      description: If it's about a particular battery or sensor profile, e.g. sigenergy-sigenstor-bat-8-0-anz or sigenergy2mqtt.
+    validations:
+      required: false
+  - type: input
+    id: browser
+    attributes:
+      label: Browser / App
+      description: For website problems, e.g. Chrome 130 on Windows.
+    validations:
+      required: false

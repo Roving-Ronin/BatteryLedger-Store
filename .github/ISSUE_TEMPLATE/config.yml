@@ -1,0 +1,12 @@
+---
+blank_issues_enabled: false
+contact_links:
+  - name: Browse the BatteryLedger Store
+    url: https://roving-ronin.github.io/BatteryLedger-Store/
+    about: Batteries and sensor profiles currently available.
+  - name: Problem with the BatteryLedger integration itself
+    url: https://github.com/Roving-Ronin/BatteryLedger/issues/new/choose
+    about: Setup, sensors or calculations in Home Assistant belong in the integration's repo.
+  - name: Store documentation
+    url: https://github.com/Roving-Ronin/BatteryLedger-Store/blob/main/README.md
+    about: Spec and sensor profile formats, and how submissions are reviewed.
