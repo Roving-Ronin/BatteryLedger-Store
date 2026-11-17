@@ -1,0 +1,54 @@
+{
+  "schema_version": 1,
+  "id": "alphaess-modbus-senalse",
+  "profile_version": 1,
+  "name": "AlphaESS Modbus TCP (senalse)",
+  "integration": {
+    "platform": "alphaess_modbus",
+    "url": "https://github.com/senalse/ha-alphaess-modbus"
+  },
+  "brands": [
+    "AlphaESS"
+  ],
+  "roles": {
+    "discharged_energy": [
+      {
+        "level": "plant",
+        "unique_id": "{entry}_total_energy_discharge_battery",
+        "default_entity_ids": [
+          "sensor.alphaess_inverter_total_energy_discharge_battery"
+        ]
+      }
+    ],
+    "charged_energy": [
+      {
+        "level": "plant",
+        "unique_id": "{entry}_total_energy_charge_battery",
+        "default_entity_ids": [
+          "sensor.alphaess_inverter_total_energy_charge_battery"
+        ]
+      }
+    ],
+    "rated_capacity": [
+      {
+        "level": "plant",
+        "unique_id": "{entry}_battery_capacity_kwh",
+        "default_entity_ids": [
+          "sensor.alphaess_inverter_battery_capacity"
+        ]
+      }
+    ],
+    "soh": [
+      {
+        "level": "plant",
+        "unique_id": "{entry}_soh_battery",
+        "default_entity_ids": [
+          "sensor.alphaess_inverter_battery_state_of_health"
+        ]
+      }
+    ]
+  },
+  "submitted_by": "Roving-Ronin",
+  "verified": false,
+  "updated": "2026-11-18"
+}

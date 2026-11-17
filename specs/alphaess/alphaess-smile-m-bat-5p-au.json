@@ -1,0 +1,47 @@
+{
+  "schema_version": 1,
+  "id": "alphaess-smile-m-bat-5p-au",
+  "spec_version": 1,
+  "brand": "AlphaESS",
+  "series": "SMILE-M5",
+  "model": "SMILE-M-BAT-5P",
+  "regions": [
+    "AU"
+  ],
+  "chemistry": "LFP",
+  "phases": [
+    "1"
+  ],
+  "capacity": {
+    "unit": "module",
+    "nominal_kwh": 5.0,
+    "usable_kwh": 5.0,
+    "min_units": 1,
+    "max_units": 6
+  },
+  "warranty": {
+    "years": 10,
+    "eol_capacity_pct": 70,
+    "throughput": {
+      "basis": "discharged",
+      "scope": "per_unit",
+      "kwh": 15600
+    },
+    "notes": "70% of usable capacity at 10 years or a throughput of 3.12 MWh per kWh of usable capacity (15.60 MWh per module), whichever comes first, from the installation date. Throughput is counted as energy discharged from the battery. The battery must stay connected to the internet (AlphaCloud)."
+  },
+  "sources": [
+    {
+      "url": "https://solarproof.com.au/datasheets/battery_datasheet_Alpha%20ESS.pdf",
+      "title": "AlphaESS Australia warranty conditions, Residential Product Series",
+      "date": "2024-10-30"
+    },
+    {
+      "url": "https://www.solarproof.com.au/datasheets/inverter_datasheet_Datasheet%20Alpha%20M5%202025.pdf",
+      "title": "AlphaESS SMILE-M5 datasheet, V04"
+    }
+  ],
+  "notes": "Earlier SMILE-M5: 5 kWh modules, 100% depth of discharge, 1-6 in parallel.",
+  "submitted_by": "Roving-Ronin",
+  "verified": false,
+  "updated": "2026-11-18"
+}

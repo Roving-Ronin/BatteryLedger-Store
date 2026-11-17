@@ -1,0 +1,48 @@
+{
+  "schema_version": 1,
+  "id": "alphaess-smile-bat-8-2ph-au",
+  "spec_version": 1,
+  "brand": "AlphaESS",
+  "series": "SMILE-T10-HV",
+  "model": "SMILE-BAT-8.2PH",
+  "regions": [
+    "AU"
+  ],
+  "chemistry": "LFP",
+  "phases": [
+    "1",
+    "3"
+  ],
+  "capacity": {
+    "unit": "module",
+    "nominal_kwh": 8.2,
+    "usable_kwh": 7.8,
+    "min_units": 1,
+    "max_units": 6
+  },
+  "warranty": {
+    "years": 10,
+    "eol_capacity_pct": 70,
+    "throughput": {
+      "basis": "discharged",
+      "scope": "per_unit",
+      "kwh": 24336
+    },
+    "notes": "70% of usable capacity at 10 years or a throughput of 3.12 MWh per kWh of usable capacity (24.34 MWh per module), whichever comes first, from the installation date. Throughput is counted as energy discharged from the battery. The battery must stay connected to the internet (AlphaCloud)."
+  },
+  "sources": [
+    {
+      "url": "https://solarproof.com.au/datasheets/battery_datasheet_Alpha%20ESS.pdf",
+      "title": "AlphaESS Australia warranty conditions, Residential Product Series",
+      "date": "2024-10-30"
+    },
+    {
+      "url": "https://www.solarquotes.com.au/wp-content/uploads/2022/11/Datasheet_APAC_SMILE-T10-HV_V06.21042023.pdf",
+      "title": "AlphaESS SMILE-T10-HV datasheet (APAC), V06"
+    }
+  ],
+  "notes": "SMILE-T10-HV (three-phase) and SMILE-S6: 8.2 kWh high-voltage modules, 7.8 kWh usable (95% depth of discharge), 1-6 in parallel.",
+  "submitted_by": "Roving-Ronin",
+  "verified": false,
+  "updated": "2026-11-18"
+}

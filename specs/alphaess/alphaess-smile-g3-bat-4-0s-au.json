@@ -1,0 +1,49 @@
+{
+  "schema_version": 1,
+  "id": "alphaess-smile-g3-bat-4-0s-au",
+  "spec_version": 1,
+  "brand": "AlphaESS",
+  "series": "SMILE-G3",
+  "model": "SMILE-G3-BAT-4.0S",
+  "regions": [
+    "AU"
+  ],
+  "chemistry": "LFP",
+  "phases": [
+    "1",
+    "3"
+  ],
+  "capacity": {
+    "unit": "module",
+    "nominal_kwh": 4.0,
+    "usable_kwh": 3.8,
+    "min_units": 1,
+    "max_units": 6
+  },
+  "warranty": {
+    "years": 10,
+    "eol_capacity_pct": 70,
+    "throughput": {
+      "basis": "discharged",
+      "scope": "per_unit",
+      "kwh": 11856
+    },
+    "notes": "70% of usable capacity at 10 years or a throughput of 3.12 MWh per kWh of usable capacity (11.86 MWh per module), whichever comes first, from the installation date. Throughput is counted as energy discharged from the battery. The battery must stay connected to the internet (AlphaCloud)."
+  },
+  "sources": [
+    {
+      "url": "https://solarproof.com.au/datasheets/battery_datasheet_Alpha%20ESS.pdf",
+      "title": "AlphaESS Australia warranty conditions, Residential Product Series",
+      "date": "2024-10-30"
+    },
+    {
+      "url": "https://e-greenelectrical.com.au/wp-content/uploads/2024/10/AlphaESS_ProductBrochure_AU_V02.20230421.pdf",
+      "title": "AlphaESS product brochure (AU), V02",
+      "date": "2023-04-21"
+    }
+  ],
+  "notes": "SMILE-G3: 4.0 kWh modules, 3.8 kWh usable (95% depth of discharge), connected in series.",
+  "submitted_by": "Roving-Ronin",
+  "verified": false,
+  "updated": "2026-11-18"
+}
