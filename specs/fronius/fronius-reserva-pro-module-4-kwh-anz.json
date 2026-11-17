@@ -1,22 +1,23 @@
 {
   "schema_version": 1,
-  "id": "fronius-reserva-pro-module-3-99-kwh-anz",
+  "id": "fronius-reserva-pro-module-4-kwh-anz",
   "spec_version": 1,
   "brand": "Fronius",
   "series": "Reserva Pro",
-  "model": "Reserva Pro module 3.99 kWh",
+  "model": "Reserva Pro module 4 kWh",
   "regions": [
     "AU",
     "NZ"
   ],
   "chemistry": "LFP",
   "phases": [
+    "1",
     "3"
   ],
   "capacity": {
     "unit": "module",
-    "nominal_kwh": 3.99,
-    "usable_kwh": 3.988,
+    "nominal_kwh": 4.0,
+    "usable_kwh": 3.98,
     "min_units": 3,
     "max_units": 8
   },
@@ -57,11 +58,15 @@
   },
   "sources": [
     {
+      "url": "https://www.fronius.com/en-au/australia/solar-energy/home-owners/products-and-solutions/store-solar-power/reserva-pro",
+      "title": "Fronius Reserva Pro (Fronius Australia)"
+    },
+    {
       "url": "https://www.fronius.com/en/~/downloads/Solar%20Energy/Terms%20of%20Warranties/SE_ToW_Battery_EN.pdf",
       "title": "Fronius International Limited Warranty Conditions, Battery (EN_0326; country group 3: Australia, New Zealand)"
     }
   ],
-  "notes": "Reserva Pro 12.0 to 32.0: 11.96-31.91 kWh usable per tower, about 3.99 kWh per module (3-8 modules). Module count and phase are inferred from the warranty's tower sizes; check against the datasheet.",
+  "notes": "Reserva Pro 12.0 to 32.0: 3-8 Reserva Pro modules per battery (3.98 kWh usable, about 4.0 kWh nominal, 99.5% depth of discharge); up to 4 batteries in parallel, one BatteryLedger battery group per battery. Primo GEN24 Plus (single-phase) supports the 12.0-20.0; Symo GEN24 Plus and Verto Plus all sizes.",
   "submitted_by": "Roving-Ronin",
   "verified": false,
   "updated": "2026-11-18"
