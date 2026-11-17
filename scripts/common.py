@@ -83,8 +83,6 @@ def check_profile(profile: dict, path: Path | None = None) -> list[str]:
             names = PLACEHOLDER_RE.findall(rule["unique_id"])
             if len(names) != len(set(names)):
                 errors.append(f"roles/{role}/{i}: each placeholder may appear only once")
-            if not names:
-                errors.append(f"roles/{role}/{i}: template has no placeholders, so it could only match one install")
     return errors
 
 

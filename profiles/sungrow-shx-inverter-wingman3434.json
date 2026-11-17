@@ -1,0 +1,54 @@
+{
+  "schema_version": 1,
+  "id": "sungrow-shx-inverter-wingman3434",
+  "profile_version": 1,
+  "name": "Sungrow SHx Inverter (Wingman3434)",
+  "integration": {
+    "platform": "sungrow_shx_inverter",
+    "url": "https://github.com/Wingman3434/sungrow-shx-inverter-hacs"
+  },
+  "brands": [
+    "Sungrow"
+  ],
+  "roles": {
+    "discharged_energy": [
+      {
+        "level": "plant",
+        "unique_id": "{serial}_total_battery_discharge",
+        "default_entity_ids": [
+          "sensor.sungrow_shx_inverter_<model>_total_battery_discharge"
+        ]
+      }
+    ],
+    "charged_energy": [
+      {
+        "level": "plant",
+        "unique_id": "{serial}_total_battery_charge",
+        "default_entity_ids": [
+          "sensor.sungrow_shx_inverter_<model>_total_battery_charge"
+        ]
+      }
+    ],
+    "rated_capacity": [
+      {
+        "level": "plant",
+        "unique_id": "{serial}_battery_capacity_high_precision",
+        "default_entity_ids": [
+          "sensor.sungrow_shx_inverter_<model>_battery_capacity_high_precision"
+        ]
+      }
+    ],
+    "soh": [
+      {
+        "level": "plant",
+        "unique_id": "{serial}_battery_state_of_health",
+        "default_entity_ids": [
+          "sensor.sungrow_shx_inverter_<model>_battery_state_of_health"
+        ]
+      }
+    ]
+  },
+  "submitted_by": "Roving-Ronin",
+  "verified": false,
+  "updated": "2026-11-17"
+}

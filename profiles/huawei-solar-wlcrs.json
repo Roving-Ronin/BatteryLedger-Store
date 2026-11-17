@@ -1,0 +1,46 @@
+{
+  "schema_version": 1,
+  "id": "huawei-solar-wlcrs",
+  "profile_version": 1,
+  "name": "Huawei Solar (wlcrs)",
+  "integration": {
+    "platform": "huawei_solar",
+    "url": "https://github.com/wlcrs/huawei_solar"
+  },
+  "brands": [
+    "Huawei",
+    "iStore"
+  ],
+  "roles": {
+    "discharged_energy": [
+      {
+        "level": "plant",
+        "unique_id": "{serial}_storage_total_discharge",
+        "default_entity_ids": [
+          "sensor.batteries_total_discharge"
+        ]
+      }
+    ],
+    "charged_energy": [
+      {
+        "level": "plant",
+        "unique_id": "{serial}_storage_total_charge",
+        "default_entity_ids": [
+          "sensor.batteries_total_charge"
+        ]
+      }
+    ],
+    "rated_capacity": [
+      {
+        "level": "plant",
+        "unique_id": "{serial}_storage_rated_capacity",
+        "default_entity_ids": [
+          "sensor.batteries_rated_capacity"
+        ]
+      }
+    ]
+  },
+  "submitted_by": "Roving-Ronin",
+  "verified": false,
+  "updated": "2026-11-17"
+}

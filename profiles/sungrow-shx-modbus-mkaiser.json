@@ -1,0 +1,54 @@
+{
+  "schema_version": 1,
+  "id": "sungrow-shx-modbus-mkaiser",
+  "profile_version": 1,
+  "name": "Sungrow SHx Modbus (mkaiser YAML package)",
+  "integration": {
+    "platform": "modbus",
+    "url": "https://github.com/mkaiser/Sungrow-SHx-Inverter-Modbus-Home-Assistant"
+  },
+  "brands": [
+    "Sungrow"
+  ],
+  "roles": {
+    "discharged_energy": [
+      {
+        "level": "plant",
+        "unique_id": "sg_total_battery_discharge",
+        "default_entity_ids": [
+          "sensor.total_battery_discharge"
+        ]
+      }
+    ],
+    "charged_energy": [
+      {
+        "level": "plant",
+        "unique_id": "sg_total_battery_charge",
+        "default_entity_ids": [
+          "sensor.total_battery_charge"
+        ]
+      }
+    ],
+    "rated_capacity": [
+      {
+        "level": "plant",
+        "unique_id": "uid_battery_capacity_high_precision",
+        "default_entity_ids": [
+          "sensor.battery_capacity_high_precision"
+        ]
+      }
+    ],
+    "soh": [
+      {
+        "level": "plant",
+        "unique_id": "sg_battery_state_of_health",
+        "default_entity_ids": [
+          "sensor.battery_state_of_health"
+        ]
+      }
+    ]
+  },
+  "submitted_by": "Roving-Ronin",
+  "verified": false,
+  "updated": "2026-11-17"
+}

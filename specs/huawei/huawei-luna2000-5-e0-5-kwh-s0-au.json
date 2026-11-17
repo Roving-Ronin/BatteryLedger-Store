@@ -1,0 +1,49 @@
+{
+  "schema_version": 1,
+  "id": "huawei-luna2000-5-e0-5-kwh-s0-au",
+  "spec_version": 1,
+  "brand": "Huawei",
+  "series": "LUNA2000",
+  "model": "LUNA2000-5-E0 5 kWh",
+  "variant": "S0",
+  "regions": [
+    "AU"
+  ],
+  "chemistry": "LFP",
+  "phases": [
+    "1",
+    "3"
+  ],
+  "capacity": {
+    "unit": "module",
+    "nominal_kwh": 5.0,
+    "usable_kwh": 5.0,
+    "min_units": 1,
+    "max_units": 9
+  },
+  "warranty": {
+    "years": 10,
+    "eol_capacity_pct": 60,
+    "throughput": {
+      "basis": "discharged",
+      "scope": "per_unit",
+      "kwh": 16450
+    },
+    "notes": "Australia: 60% of usable energy at 10 years or 16.45 MWh life cycle discharge per 5 kWh battery pack, whichever comes first. Counted from installation (the policy's start of 180 days after shipment is ignored). The power module (LUNA2000-5KW-C0) has its own time-only 10-year warranty. Requires a FusionSolar connection."
+  },
+  "sources": [
+    {
+      "url": "https://solar.huawei.com/admin/asset/v1/pro/view/d373d9834172413b85d346e1f691915d.pdf",
+      "title": "Huawei Residential Smart PV Warranty Policy (Global), Issue 04",
+      "date": "2025-11-30"
+    },
+    {
+      "url": "https://solarproof.com.au/datasheets/battery_datasheet_ES-HUW-LUNA-5kWh-E0.pdf",
+      "title": "Huawei LUNA2000-5/10/15-S0 datasheet (AU)"
+    }
+  ],
+  "notes": "LUNA2000-5/10/15-S0: one LUNA2000-5KW-C0 power module with 1-3 LUNA2000-5-E0 battery modules of 5 kWh, 100% usable; up to 3 modules per inverter and normally up to 3 inverters in a plant. No longer sold in Australia (since Feb 2024); iStore modules are compatible.",
+  "submitted_by": "Roving-Ronin",
+  "verified": false,
+  "updated": "2026-11-17"
+}

@@ -100,9 +100,11 @@ const ROLE = {
   rated_capacity: "Rated capacity", soh: "State of health",
   module_discharged_energy: "Module discharged energy", module_charged_energy: "Module charged energy",
   module_rated_capacity: "Module rated capacity", module_soc: "Module SoC", module_soh: "Module SoH",
+  install_date: "Battery install date (pre-fills the warranty start date)",
 };
 
 const LEVEL = { plant: "Plant", inverter: "Inverter", module: "Each battery module" };
+const brandsText = (p) => p.brands.includes("*") ? "Any battery brand" : p.brands.map(esc).join(", ");
 
 // Entity IDs the integration creates by default; the unique-ID templates used for matching aren't shown.
 function profileCard(p) {
@@ -118,7 +120,7 @@ function profileCard(p) {
   }).join("");
   const link = p.integration.url ? `<a href="${esc(p.integration.url)}" rel="noopener">${esc(p.name)}</a>` : esc(p.name);
   return `<article class="card wide">
-    <div class="brand">${p.brands.map(esc).join(", ")}</div>
+    <div class="brand">${brandsText(p)}</div>
     <h2>${link}</h2>
     <div class="tags"><span class="tag ${p.verified ? "ok" : "warn"}">${p.verified ? "Verified" : "Unverified"}</span></div>
     <ul class="roles">${roles}</ul>
@@ -128,7 +130,7 @@ function profileCard(p) {
 
 function renderProfiles() {
   const b = $("pbrand").value, i = $("pintegration").value;
-  const hits = profiles.filter((p) => (!b || p.brands.includes(b)) && (!i || p.id === i));
+  const hits = profiles.filter((p) => (!b || p.brands.includes(b) || p.brands.includes("*")) && (!i || p.id === i));
   $("pcount").textContent = `${hits.length} of ${profiles.length} sensor profiles`;
   $("pgrid").innerHTML = hits.map(profileCard).join("");
 }
@@ -195,7 +197,9 @@ fetch("index.json", { cache: "no-cache" })
     ["q", "series", "region", "phase"].forEach((id) => $(id).addEventListener("input", render));
     render();
     profiles = idx.profiles ?? [];
-    for (const x of [...new Set(profiles.flatMap((p) => p.brands))].sort()) $("pbrand").add(new Option(x, x));
+    // Every brand in the Store: "*" profiles (e.g. Energy Manager) apply to all of them.
+    for (const x of [...new Set([...idx.brands, ...profiles.flatMap((p) => p.brands)].filter((b) => b !== "*"))].sort())
+      $("pbrand").add(new Option(x, x));
     for (const p of profiles) $("pintegration").add(new Option(p.name, p.id));
     ["pbrand", "pintegration"].forEach((id) => $(id).addEventListener("input", renderProfiles));
     renderProfiles();

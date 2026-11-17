@@ -57,7 +57,7 @@
       }
     },
     "brands": {
-      "description": "Battery brands (as used in specs) this profile applies to.",
+      "description": "Battery brands (as used in specs) this profile applies to, or \"*\" for an integration that works with any brand (e.g. a translation layer such as Energy Manager).",
       "type": "array",
       "minItems": 1,
       "uniqueItems": true,
@@ -98,6 +98,10 @@
         },
         "module_soh": {
           "$ref": "#/$defs/module_rules"
+        },
+        "install_date": {
+          "$ref": "#/$defs/system_rules",
+          "description": "A date entity holding the battery's install / warranty start date; pre-fills setup."
         }
       }
     },
@@ -119,7 +123,7 @@
   },
   "$defs": {
     "template": {
-      "description": "unique_id template. Placeholders: {entry} {device} {prefix} {plant} {inverter} {station} {serial}. Everything else is literal.",
+      "description": "unique_id template. Placeholders for parts that differ between installs: {entry} {device} {prefix} {plant} {inverter} {station} {serial}. An integration with fixed unique IDs needs none. Everything else is literal.",
       "type": "string",
       "minLength": 3,
       "maxLength": 200,
@@ -152,9 +156,14 @@
             "minItems": 1,
             "items": {
               "type": "string",
-              "pattern": "^sensor\\.[a-z0-9_<>]+$",
+              "pattern": "^[a-z_]+\\.[a-z0-9_<>]+$",
               "maxLength": 120
             }
+          },
+          "platform": {
+            "description": "Entity registry platform for this rule, when it differs from integration.platform (e.g. input_datetime for a helper).",
+            "type": "string",
+            "pattern": "^[a-z0-9_]+$"
           }
         }
       }
@@ -183,7 +192,7 @@
             "minItems": 1,
             "items": {
               "type": "string",
-              "pattern": "^sensor\\.[a-z0-9_<>]+$",
+              "pattern": "^[a-z_]+\\.[a-z0-9_<>]+$",
               "maxLength": 120
             }
           }

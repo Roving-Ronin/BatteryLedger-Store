@@ -29,6 +29,12 @@ def test_template_rules():
     p["roles"]["soh"] = [{"level": "plant", "unique_id": "{entry}_{entry}_plant_ess_soh"}]
     assert any("only once" in e for e in common.check_profile(p))
     p["roles"]["soh"] = [{"level": "plant", "unique_id": "fixed_plant_ess_soh"}]
-    assert any("no placeholders" in e for e in common.check_profile(p))
+    assert common.check_profile(p) == []  # fixed unique IDs are fine (e.g. Energy Manager)
     p["roles"]["soh"] = [{"level": "plant", "unique_id": "{entry}_{bogus}_soh"}]
     assert common.check_profile(p)
+
+
+def test_energy_manager_any_brand_and_install_date():
+    p = _profiles()["energy-manager"]
+    assert p["brands"] == ["*"]
+    assert p["roles"]["install_date"][0]["platform"] == "input_datetime"

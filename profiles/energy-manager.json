@@ -1,0 +1,64 @@
+{
+  "schema_version": 1,
+  "id": "energy-manager",
+  "profile_version": 1,
+  "name": "Energy Manager",
+  "integration": {
+    "platform": "mqtt",
+    "url": "https://github.com/ha-energymanager/ha-energymanager"
+  },
+  "brands": [
+    "*"
+  ],
+  "roles": {
+    "discharged_energy": [
+      {
+        "level": "plant",
+        "unique_id": "inverter_total_battery_discharge_mqtt",
+        "default_entity_ids": [
+          "sensor.inverter_total_battery_discharge"
+        ]
+      }
+    ],
+    "charged_energy": [
+      {
+        "level": "plant",
+        "unique_id": "inverter_total_battery_charge_mqtt",
+        "default_entity_ids": [
+          "sensor.inverter_total_battery_charge"
+        ]
+      }
+    ],
+    "rated_capacity": [
+      {
+        "level": "plant",
+        "unique_id": "inverter_battery_capacity_mqtt",
+        "default_entity_ids": [
+          "sensor.inverter_battery_capacity"
+        ]
+      }
+    ],
+    "soh": [
+      {
+        "level": "plant",
+        "unique_id": "inverter_battery_soh_mqtt",
+        "default_entity_ids": [
+          "sensor.inverter_battery_soh"
+        ]
+      }
+    ],
+    "install_date": [
+      {
+        "level": "plant",
+        "platform": "input_datetime",
+        "unique_id": "battery_install_date",
+        "default_entity_ids": [
+          "input_datetime.battery_install_date"
+        ]
+      }
+    ]
+  },
+  "submitted_by": "Roving-Ronin",
+  "verified": false,
+  "updated": "2026-11-17"
+}
