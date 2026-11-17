@@ -1,7 +1,7 @@
 {
   "schema_version": 1,
   "id": "sigenergy2mqtt",
-  "profile_version": 1,
+  "profile_version": 2,
   "name": "sigenergy2mqtt (MQTT)",
   "integration": {
     "platform": "mqtt",
@@ -14,59 +14,88 @@
     "discharged_energy": [
       {
         "level": "plant",
-        "unique_id": "{prefix}_{plant}_accumulated_discharge_energy"
+        "unique_id": "{prefix}_{plant}_accumulated_discharge_energy",
+        "default_entity_ids": [
+          "sensor.sigen_0_accumulated_discharge_energy"
+        ]
       },
       {
         "level": "inverter",
-        "unique_id": "{prefix}_{plant}_{inverter}_30574"
+        "unique_id": "{prefix}_{plant}_{inverter}_30574",
+        "default_entity_ids": [
+          "sensor.sigen_0_inverter_1_accumulated_discharge_energy"
+        ]
       }
     ],
     "charged_energy": [
       {
         "level": "plant",
-        "unique_id": "{prefix}_{plant}_accumulated_charge_energy"
+        "unique_id": "{prefix}_{plant}_accumulated_charge_energy",
+        "default_entity_ids": [
+          "sensor.sigen_0_accumulated_charge_energy"
+        ]
       },
       {
         "level": "inverter",
-        "unique_id": "{prefix}_{plant}_{inverter}_30568"
+        "unique_id": "{prefix}_{plant}_{inverter}_30568",
+        "default_entity_ids": [
+          "sensor.sigen_0_inverter_1_accumulated_charge_energy"
+        ]
       }
     ],
     "rated_capacity": [
       {
         "level": "plant",
-        "unique_id": "{prefix}_{plant}_247_30083"
+        "unique_id": "{prefix}_{plant}_247_30083",
+        "default_entity_ids": [
+          "sensor.sigen_0_plant_rated_energy_capacity"
+        ]
       }
     ],
     "soh": [
       {
         "level": "plant",
-        "unique_id": "{prefix}_{plant}_247_30087"
+        "unique_id": "{prefix}_{plant}_247_30087",
+        "default_entity_ids": [
+          "sensor.sigen_0_plant_battery_soh"
+        ]
       },
       {
         "level": "inverter",
-        "unique_id": "{prefix}_{plant}_{inverter}_30602"
+        "unique_id": "{prefix}_{plant}_{inverter}_30602",
+        "default_entity_ids": [
+          "sensor.sigen_0_inverter_1_battery_soh"
+        ]
       }
     ],
     "module_discharged_energy": [
       {
         "level": "module",
-        "unique_id": "{prefix}_{plant}_{station}_4_{serial}_total_discharge_amount"
+        "unique_id": "{prefix}_{plant}_{station}_4_{serial}_total_discharge_amount",
+        "default_entity_ids": [
+          "sensor.sigen_0_cloud_4_<serial>_total_discharge_amount"
+        ]
       }
     ],
     "module_rated_capacity": [
       {
         "level": "module",
-        "unique_id": "{prefix}_{plant}_{station}_4_{serial}_rated_battery_capacity"
+        "unique_id": "{prefix}_{plant}_{station}_4_{serial}_rated_battery_capacity",
+        "default_entity_ids": [
+          "sensor.sigen_0_cloud_4_<serial>_rated_battery_capacity"
+        ]
       }
     ],
     "module_soc": [
       {
         "level": "module",
-        "unique_id": "{prefix}_{plant}_{station}_4_{serial}_battery_soc"
+        "unique_id": "{prefix}_{plant}_{station}_4_{serial}_battery_soc",
+        "default_entity_ids": [
+          "sensor.sigen_0_cloud_4_<serial>_battery_soc"
+        ]
       }
     ]
   },
-  "notes": "Modbus sensors use <prefix>_<plant>_<device address>_<register> as unique ID, so this profile works with either entity naming option (including sigenergy-local-modbus-naming). Per-module sensors (device type 4 = battery) come from the optional, unofficial Sigen Cloud API and contain the station ID and module serial number.",
   "submitted_by": "Roving-Ronin",
   "verified": false,
   "updated": "2026-11-17"

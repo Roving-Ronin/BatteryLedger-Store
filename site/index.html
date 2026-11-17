@@ -33,8 +33,12 @@
   .tabs button.on { color:var(--text); border-color:var(--accent); }
   .filters.two { grid-template-columns:1fr 1fr; }
   .hint { color:var(--muted); margin:14px 0 0; }
-  .roles { font-size:12px; margin:6px 0 0; padding-left:16px; }
-  .roles code { word-break:break-all; }
+  .card.wide { grid-column: 1 / -1; }
+  .roles { list-style:none; font-size:13px; margin:8px 0; padding:0; display:grid; gap:10px; }
+  .roles .lvl { display:grid; grid-template-columns:150px 1fr; gap:8px; margin-top:2px; }
+  .roles .lvl span { color:var(--muted); }
+  .roles code { word-break:break-all; color:var(--text); }
+  .roles .older { grid-column:2; color:var(--muted); font-size:12px; }
   @media (max-width:900px) { .filters { grid-template-columns:1fr 1fr; } }
 </style>
 </head>
@@ -98,17 +102,26 @@ const ROLE = {
   module_rated_capacity: "Module rated capacity", module_soc: "Module SoC", module_soh: "Module SoH",
 };
 
+const LEVEL = { plant: "Plant", inverter: "Inverter", module: "Each battery module" };
+
+// Entity IDs the integration creates by default; the unique-ID templates used for matching aren't shown.
 function profileCard(p) {
-  const roles = Object.entries(p.roles).map(([role, rules]) =>
-    `<li>${ROLE[role] ?? esc(role)}: ${rules.map((r) => `${esc(r.level)} <code>${esc(r.unique_id)}</code>`).join(" · ")}</li>`).join("");
-  const link = p.integration.url ? `<a href="${esc(p.integration.url)}" rel="noopener">${esc(p.integration.platform)}</a>` : esc(p.integration.platform);
-  return `<article class="card">
+  const roles = Object.entries(p.roles).map(([role, rules]) => {
+    const lines = rules.map((r) => {
+      const ids = r.default_entity_ids ?? [];
+      const older = ids.slice(1).map((id) => `<code>${esc(id)}</code>`).join(", ");
+      return `<div class="lvl"><span>${LEVEL[r.level] ?? esc(r.level)}</span>` +
+        (ids.length ? `<code>${esc(ids[0])}</code>` : "") +
+        (older ? `<div class="older">older versions: ${older}</div>` : "") + `</div>`;
+    }).join("");
+    return `<li><strong>${ROLE[role] ?? esc(role)}</strong>${lines}</li>`;
+  }).join("");
+  const link = p.integration.url ? `<a href="${esc(p.integration.url)}" rel="noopener">${esc(p.name)}</a>` : esc(p.name);
+  return `<article class="card wide">
     <div class="brand">${p.brands.map(esc).join(", ")}</div>
-    <h2>${esc(p.name)}</h2>
-    <div class="tags"><span class="tag">platform: ${link}</span>
-      <span class="tag ${p.verified ? "ok" : "warn"}">${p.verified ? "Verified" : "Unverified"}</span></div>
+    <h2>${link}</h2>
+    <div class="tags"><span class="tag ${p.verified ? "ok" : "warn"}">${p.verified ? "Verified" : "Unverified"}</span></div>
     <ul class="roles">${roles}</ul>
-    ${p.notes ? `<p class="brand">${esc(p.notes)}</p>` : ""}
     <code>${esc(p.id)} · v${p.profile_version}</code>
   </article>`;
 }

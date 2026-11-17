@@ -5,24 +5,55 @@
   "description": "How to find the sensors BatteryLedger needs among the entities created by one Home Assistant integration.",
   "type": "object",
   "additionalProperties": false,
-  "required": ["schema_version", "id", "profile_version", "name", "integration", "brands", "roles", "updated"],
+  "required": [
+    "schema_version",
+    "id",
+    "profile_version",
+    "name",
+    "integration",
+    "brands",
+    "roles",
+    "updated"
+  ],
   "properties": {
-    "schema_version": { "const": 1 },
-    "id": { "type": "string", "pattern": "^[a-z0-9]+(-[a-z0-9]+)*$", "maxLength": 64 },
-    "profile_version": { "type": "integer", "minimum": 1 },
-    "name": { "type": "string", "minLength": 1, "maxLength": 96, "pattern": "^[^\\u0000-\\u001f]+$" },
+    "schema_version": {
+      "const": 1
+    },
+    "id": {
+      "type": "string",
+      "pattern": "^[a-z0-9]+(-[a-z0-9]+)*$",
+      "maxLength": 64
+    },
+    "profile_version": {
+      "type": "integer",
+      "minimum": 1
+    },
+    "name": {
+      "type": "string",
+      "minLength": 1,
+      "maxLength": 96,
+      "pattern": "^[^\\u0000-\\u001f]+$"
+    },
     "integration": {
       "type": "object",
       "additionalProperties": false,
-      "required": ["platform"],
+      "required": [
+        "platform"
+      ],
       "properties": {
         "platform": {
           "description": "Entity registry platform of the sensors (the integration domain, or 'mqtt' for MQTT discovery).",
           "type": "string",
           "pattern": "^[a-z0-9_]+$"
         },
-        "url": { "type": "string", "pattern": "^https://" },
-        "min_version": { "type": "string", "maxLength": 32 }
+        "url": {
+          "type": "string",
+          "pattern": "^https://"
+        },
+        "min_version": {
+          "type": "string",
+          "maxLength": 32
+        }
       }
     },
     "brands": {
@@ -30,28 +61,61 @@
       "type": "array",
       "minItems": 1,
       "uniqueItems": true,
-      "items": { "type": "string", "minLength": 1, "maxLength": 64 }
+      "items": {
+        "type": "string",
+        "minLength": 1,
+        "maxLength": 64
+      }
     },
     "roles": {
       "type": "object",
       "additionalProperties": false,
       "minProperties": 1,
       "properties": {
-        "discharged_energy": { "$ref": "#/$defs/system_rules" },
-        "charged_energy": { "$ref": "#/$defs/system_rules" },
-        "rated_capacity": { "$ref": "#/$defs/system_rules" },
-        "soh": { "$ref": "#/$defs/system_rules" },
-        "module_discharged_energy": { "$ref": "#/$defs/module_rules" },
-        "module_charged_energy": { "$ref": "#/$defs/module_rules" },
-        "module_rated_capacity": { "$ref": "#/$defs/module_rules" },
-        "module_soc": { "$ref": "#/$defs/module_rules" },
-        "module_soh": { "$ref": "#/$defs/module_rules" }
+        "discharged_energy": {
+          "$ref": "#/$defs/system_rules"
+        },
+        "charged_energy": {
+          "$ref": "#/$defs/system_rules"
+        },
+        "rated_capacity": {
+          "$ref": "#/$defs/system_rules"
+        },
+        "soh": {
+          "$ref": "#/$defs/system_rules"
+        },
+        "module_discharged_energy": {
+          "$ref": "#/$defs/module_rules"
+        },
+        "module_charged_energy": {
+          "$ref": "#/$defs/module_rules"
+        },
+        "module_rated_capacity": {
+          "$ref": "#/$defs/module_rules"
+        },
+        "module_soc": {
+          "$ref": "#/$defs/module_rules"
+        },
+        "module_soh": {
+          "$ref": "#/$defs/module_rules"
+        }
       }
     },
-    "notes": { "type": "string", "maxLength": 2000 },
-    "submitted_by": { "type": "string", "pattern": "^[A-Za-z0-9-]{1,39}$" },
-    "verified": { "type": "boolean" },
-    "updated": { "type": "string", "format": "date" }
+    "notes": {
+      "type": "string",
+      "maxLength": 2000
+    },
+    "submitted_by": {
+      "type": "string",
+      "pattern": "^[A-Za-z0-9-]{1,39}$"
+    },
+    "verified": {
+      "type": "boolean"
+    },
+    "updated": {
+      "type": "string",
+      "format": "date"
+    }
   },
   "$defs": {
     "template": {
@@ -68,10 +132,30 @@
       "items": {
         "type": "object",
         "additionalProperties": false,
-        "required": ["level", "unique_id"],
+        "required": [
+          "level",
+          "unique_id"
+        ],
         "properties": {
-          "level": { "enum": ["plant", "inverter"] },
-          "unique_id": { "$ref": "#/$defs/template" }
+          "level": {
+            "enum": [
+              "plant",
+              "inverter"
+            ]
+          },
+          "unique_id": {
+            "$ref": "#/$defs/template"
+          },
+          "default_entity_ids": {
+            "description": "Entity IDs the integration creates for this sensor with its default naming, newest first, shown on the Store site. Not used for matching (that's unique_id). Use <serial> etc. for install-specific parts.",
+            "type": "array",
+            "minItems": 1,
+            "items": {
+              "type": "string",
+              "pattern": "^sensor\\.[a-z0-9_<>]+$",
+              "maxLength": 120
+            }
+          }
         }
       }
     },
@@ -81,10 +165,28 @@
       "items": {
         "type": "object",
         "additionalProperties": false,
-        "required": ["level", "unique_id"],
+        "required": [
+          "level",
+          "unique_id"
+        ],
         "properties": {
-          "level": { "const": "module" },
-          "unique_id": { "$ref": "#/$defs/template", "pattern": "\\{serial\\}" }
+          "level": {
+            "const": "module"
+          },
+          "unique_id": {
+            "$ref": "#/$defs/template",
+            "pattern": "\\{serial\\}"
+          },
+          "default_entity_ids": {
+            "description": "Entity IDs the integration creates for this sensor with its default naming, newest first, shown on the Store site. Not used for matching (that's unique_id). Use <serial> etc. for install-specific parts.",
+            "type": "array",
+            "minItems": 1,
+            "items": {
+              "type": "string",
+              "pattern": "^sensor\\.[a-z0-9_<>]+$",
+              "maxLength": 120
+            }
+          }
         }
       }
     }

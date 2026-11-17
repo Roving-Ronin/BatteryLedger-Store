@@ -55,7 +55,7 @@ Sensors are matched by their **entity registry unique ID**, never by entity ID (
 |---|---|
 | `integration.platform` | Entity registry platform: the integration domain (e.g. `sigen`) or `mqtt` |
 | `brands` | Battery brands the profile applies to |
-| `roles.<role>` | Matching rules in order of preference, each with a `level` (`plant`, `inverter` or `module`) and a `unique_id` template |
+| `roles.<role>` | Matching rules in order of preference, each with a `level` (`plant`, `inverter` or `module`), a `unique_id` template (used for matching) and `default_entity_ids` (the entity IDs the integration creates by default, newest first; shown on the Store site) |
 
 Roles: `discharged_energy`, `charged_energy`, `rated_capacity`, `soh`, and per-module
 `module_discharged_energy`, `module_charged_energy`, `module_rated_capacity`, `module_soc`, `module_soh`.

@@ -29,6 +29,9 @@ python -m pytest -q tests
 - **No install-specific data**, ever: no serial numbers, station IDs, config entry IDs, install dates,
   costs or energy totals. Sensor profile templates use placeholders for anything that differs between
   installs; module templates must contain `{serial}`.
+- Sensor profiles: `unique_id` templates do the matching; `default_entity_ids` are only for people reading the
+  Store site. Take both from the integration's source, not guesses, and keep install-specific parts as
+  placeholders (`<serial>`).
 - Field naming: `series` is shown to users as **Model** (product line, e.g. SigenStor, Neo); `model` is
   shown as **Battery module** (e.g. SigenStor BAT 8.0).
 - Specs sort brand → model line → battery module, numbers largest first (`build_index.natural_key`).

@@ -1,7 +1,7 @@
 {
   "schema_version": 1,
   "id": "sigen-local-modbus",
-  "profile_version": 1,
+  "profile_version": 2,
   "name": "Sigenergy ESS (TypQxQ Local Modbus)",
   "integration": {
     "platform": "sigen",
@@ -14,45 +14,70 @@
     "discharged_energy": [
       {
         "level": "plant",
-        "unique_id": "{entry}_{device}_plant_accumulated_battery_discharge_energy"
+        "unique_id": "{entry}_{device}_plant_accumulated_battery_discharge_energy",
+        "default_entity_ids": [
+          "sensor.sigen_plant_accumulated_battery_discharge_energy",
+          "sensor.sigen_plant_total_discharged_energy_of_the_ess"
+        ]
       },
       {
         "level": "inverter",
-        "unique_id": "{entry}_{device}_inverter_ess_accumulated_discharge_energy"
+        "unique_id": "{entry}_{device}_inverter_ess_accumulated_discharge_energy",
+        "default_entity_ids": [
+          "sensor.sigen_inverter_total_discharge_energy"
+        ]
       }
     ],
     "charged_energy": [
       {
         "level": "plant",
-        "unique_id": "{entry}_{device}_plant_accumulated_battery_charge_energy"
+        "unique_id": "{entry}_{device}_plant_accumulated_battery_charge_energy",
+        "default_entity_ids": [
+          "sensor.sigen_plant_accumulated_battery_charge_energy",
+          "sensor.sigen_plant_total_charged_energy_of_the_ess"
+        ]
       },
       {
         "level": "inverter",
-        "unique_id": "{entry}_{device}_inverter_ess_accumulated_charge_energy"
+        "unique_id": "{entry}_{device}_inverter_ess_accumulated_charge_energy",
+        "default_entity_ids": [
+          "sensor.sigen_inverter_total_charge_energy"
+        ]
       }
     ],
     "rated_capacity": [
       {
         "level": "plant",
-        "unique_id": "{entry}_{device}_plant_ess_rated_energy_capacity"
+        "unique_id": "{entry}_{device}_plant_ess_rated_energy_capacity",
+        "default_entity_ids": [
+          "sensor.sigen_plant_rated_energy_capacity"
+        ]
       },
       {
         "level": "inverter",
-        "unique_id": "{entry}_{device}_inverter_rated_battery_capacity"
+        "unique_id": "{entry}_{device}_inverter_rated_battery_capacity",
+        "default_entity_ids": [
+          "sensor.sigen_inverter_rated_battery_capacity"
+        ]
       }
     ],
     "soh": [
       {
         "level": "plant",
-        "unique_id": "{entry}_{device}_plant_ess_soh"
+        "unique_id": "{entry}_{device}_plant_ess_soh",
+        "default_entity_ids": [
+          "sensor.sigen_plant_battery_state_of_health"
+        ]
       },
       {
         "level": "inverter",
-        "unique_id": "{entry}_{device}_inverter_ess_battery_soh"
+        "unique_id": "{entry}_{device}_inverter_ess_battery_soh",
+        "default_entity_ids": [
+          "sensor.sigen_inverter_battery_state_of_health"
+        ]
       }
     ]
   },
-  "notes": "Unique IDs are <config entry id>_<device name>_<sensor key>. The plant 'Total Discharged Energy of the ESS' sensor is key plant_accumulated_battery_discharge_energy (register 30204).",
   "submitted_by": "Roving-Ronin",
   "verified": false,
   "updated": "2026-11-17"
