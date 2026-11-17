@@ -1,0 +1,94 @@
+name: Process spec submission
+
+on:
+  issues:
+    types: [opened, edited, reopened]
+
+permissions:
+  contents: write
+  issues: write
+  pull-requests: write
+
+concurrency:
+  group: submission-${{ github.event.issue.number }}
+  cancel-in-progress: true
+
+jobs:
+  process:
+    if: >-
+      github.event.issue.state == 'open' && (
+        contains(github.event.issue.labels.*.name, 'spec-submission') ||
+        contains(github.event.issue.body, '<!-- batteryledger-spec -->')
+      )
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+
+      - run: pip install -r scripts/requirements.txt
+
+      - name: Convert issue to spec
+        id: convert
+        env:
+          # Untrusted input: passed via env only, never interpolated into the script.
+          ISSUE_BODY: ${{ github.event.issue.body }}
+          ISSUE_AUTHOR: ${{ github.event.issue.user.login }}
+        run: |
+          python scripts/issue_to_spec.py "$RUNNER_TEMP/result.json"
+          echo "ok=$(jq -r .ok "$RUNNER_TEMP/result.json")" >> "$GITHUB_OUTPUT"
+          echo "title=$(jq -r '.title // ""' "$RUNNER_TEMP/result.json")" >> "$GITHUB_OUTPUT"
+          echo "path=$(jq -r '.path // ""' "$RUNNER_TEMP/result.json")" >> "$GITHUB_OUTPUT"
+
+      - name: Re-validate whole store
+        if: steps.convert.outputs.ok == 'true'
+        run: python scripts/validate.py
+
+      - name: Open or update pull request
+        id: pr
+        if: steps.convert.outputs.ok == 'true'
+        uses: peter-evans/create-pull-request@v7
+        with:
+          branch: submission/issue-${{ github.event.issue.number }}
+          add-paths: ${{ steps.convert.outputs.path }}
+          commit-message: ${{ steps.convert.outputs.title }}
+          title: ${{ steps.convert.outputs.title }}
+          labels: spec-submission
+          body: |
+            Generated from #${{ github.event.issue.number }} by @${{ github.event.issue.user.login }}.
+
+            Maintainer checklist:
+            - [ ] Figures match the linked manufacturer documents
+            - [ ] Regions and phases are correct
+            - [ ] Set `"verified": true` if checked against the sources
+
+            Resolves #${{ github.event.issue.number }}
+
+      - name: Report back on the issue
+        if: always() && steps.convert.outcome == 'success'
+        uses: actions/github-script@v7
+        env:
+          RESULT_PATH: ${{ runner.temp }}/result.json
+          PR_URL: ${{ steps.pr.outputs.pull-request-url }}
+        with:
+          script: |
+            const fs = require('fs');
+            const result = JSON.parse(fs.readFileSync(process.env.RESULT_PATH, 'utf8'));
+            const issue_number = context.issue.number;
+            const { owner, repo } = context.repo;
+            let body;
+            if (result.ok) {
+              body = `✅ Thanks! This passed validation as **${result.action === 'correction' ? 'a correction to' : 'a new spec'}** \`${result.spec_id}\`.\n\n` +
+                     `A maintainer will review it in ${process.env.PR_URL || 'the linked pull request'}. ` +
+                     `Once merged it appears in the Store and in BatteryLedger after its next Store refresh.\n\n` +
+                     `<details><summary>Generated spec</summary>\n\n${result.summary}\n</details>`;
+              try { await github.rest.issues.removeLabel({ owner, repo, issue_number, name: 'needs-changes' }); } catch (e) {}
+            } else {
+              body = `⚠️ This submission couldn't be processed yet:\n\n` +
+                     result.errors.map(e => `- ${e}`).join('\n') +
+                     `\n\nEdit the issue to fix these and it will be checked again automatically.`;
+              await github.rest.issues.addLabels({ owner, repo, issue_number, labels: ['needs-changes'] });
+            }
+            await github.rest.issues.createComment({ owner, repo, issue_number, body });

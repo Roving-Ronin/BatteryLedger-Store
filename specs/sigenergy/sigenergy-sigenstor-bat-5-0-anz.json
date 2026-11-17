@@ -1,0 +1,47 @@
+{
+  "schema_version": 1,
+  "id": "sigenergy-sigenstor-bat-5-0-anz",
+  "spec_version": 1,
+  "brand": "Sigenergy",
+  "model": "SigenStor BAT 5.0",
+  "regions": [
+    "AU",
+    "NZ"
+  ],
+  "chemistry": "LFP",
+  "phases": [
+    "1",
+    "3"
+  ],
+  "capacity": {
+    "unit": "module",
+    "nominal_kwh": 5.38,
+    "usable_kwh": 5.2,
+    "reported_kwh": 5.38,
+    "min_units": 1,
+    "max_units": 6
+  },
+  "warranty": {
+    "years": 10,
+    "eol_capacity_pct": 70,
+    "throughput": {
+      "basis": "discharged",
+      "scope": "per_unit",
+      "kwh": 15840
+    },
+    "notes": "70% of usable energy at 10 years or the Minimum Throughput Energy, whichever comes first. Throughput is counted as discharged energy, recorded by the battery from the warranty start date."
+  },
+  "sources": [
+    {
+      "url": "https://www.sigenergy.com/au/support/warranty",
+      "title": "Sigenergy Australia warranty information"
+    },
+    {
+      "url": "https://www.sigenergy.com/au/support/files/1002",
+      "title": "SigenStor BAT 5.0/8.0 datasheet"
+    }
+  ],
+  "submitted_by": "Roving-Ronin",
+  "verified": false,
+  "updated": "2026-11-17"
+}

@@ -1,0 +1,209 @@
+# Field labels are parsed by scripts/issue_to_spec.py and field ids are used by the
+# BatteryLedger integration to pre-fill this form. Change both together.
+name: Battery spec submission
+description: Add a new battery to the BatteryLedger Store, or correct an existing one.
+title: "[Spec] "
+labels: ["spec-submission"]
+body:
+  - type: markdown
+    attributes:
+      value: |
+        Thanks for contributing! Please take figures from the **manufacturer's datasheet and warranty document** for your region, and link them below.
+        Only product specifications go here: don't include your install date, cost, serial numbers or energy totals. This issue is public.
+
+  - type: input
+    id: spec_id
+    attributes:
+      label: Existing spec ID (corrections only)
+      description: Leave blank for a new battery. For a correction, enter the ID shown in BatteryLedger or the Store, e.g. sigenergy-sigenstor-bat-8-0-anz
+    validations:
+      required: false
+
+  - type: input
+    id: brand
+    attributes:
+      label: Brand
+      placeholder: Sigenergy
+    validations:
+      required: true
+
+  - type: input
+    id: model
+    attributes:
+      label: Model
+      placeholder: SigenStor BAT 8.0
+    validations:
+      required: true
+
+  - type: input
+    id: variant
+    attributes:
+      label: Variant
+      description: Optional, only if the same model has variants with different specs.
+    validations:
+      required: false
+
+  - type: input
+    id: regions
+    attributes:
+      label: Regions
+      description: Comma-separated two-letter country codes this warranty applies to, or GLOBAL.
+      placeholder: AU, NZ
+    validations:
+      required: true
+
+  - type: dropdown
+    id: chemistry
+    attributes:
+      label: Chemistry
+      options: [LFP, NMC, NCA, LTO, Sodium-ion, Lead-acid, Other]
+    validations:
+      required: true
+
+  - type: checkboxes
+    id: phases
+    attributes:
+      label: Supported phases
+      options:
+        - label: Single phase
+        - label: Three phase
+
+  - type: dropdown
+    id: capacity_unit
+    attributes:
+      label: Product type
+      options:
+        - Stackable module
+        - All-in-one system
+    validations:
+      required: true
+
+  - type: input
+    id: nominal_kwh
+    attributes:
+      label: Nominal capacity per unit (kWh)
+      placeholder: "8.06"
+    validations:
+      required: false
+
+  - type: input
+    id: usable_kwh
+    attributes:
+      label: Usable capacity per unit (kWh)
+      description: Warranted usable energy at beginning of life.
+      placeholder: "7.8"
+    validations:
+      required: true
+
+  - type: input
+    id: reported_kwh
+    attributes:
+      label: Capacity reported by the inverter per unit (kWh)
+      description: Optional. What the inverter/BMS shows as rated capacity per unit, if known.
+    validations:
+      required: false
+
+  - type: input
+    id: min_units
+    attributes:
+      label: Minimum units per system
+    validations:
+      required: false
+
+  - type: input
+    id: max_units
+    attributes:
+      label: Maximum units per system
+    validations:
+      required: false
+
+  - type: input
+    id: warranty_years
+    attributes:
+      label: Warranty period (years)
+      placeholder: "10"
+    validations:
+      required: true
+
+  - type: input
+    id: eol_capacity_pct
+    attributes:
+      label: Warranted end-of-life capacity (%)
+      placeholder: "70"
+    validations:
+      required: true
+
+  - type: dropdown
+    id: throughput_basis
+    attributes:
+      label: Throughput counted as
+      options:
+        - Not stated in warranty
+        - Charged energy
+        - Discharged energy
+    validations:
+      required: true
+
+  - type: dropdown
+    id: throughput_scope
+    attributes:
+      label: Throughput limit applies
+      options:
+        - Per unit
+        - Per system (regardless of unit count)
+        - Table by unit count
+        - No throughput limit
+    validations:
+      required: true
+
+  - type: input
+    id: throughput_kwh
+    attributes:
+      label: Throughput limit (kWh)
+      description: For "Per unit" or "Per system". Enter kWh, not MWh (23.77 MWh = 23770).
+      placeholder: "23770"
+    validations:
+      required: false
+
+  - type: textarea
+    id: throughput_table
+    attributes:
+      label: Throughput table
+      description: For "Table by unit count" only. One row per line as units=kWh.
+      placeholder: |
+        2=40000
+        3=60000
+    validations:
+      required: false
+
+  - type: textarea
+    id: warranty_notes
+    attributes:
+      label: Warranty notes
+      description: Conditions worth knowing, e.g. "70% at 10 years or throughput, whichever first".
+    validations:
+      required: false
+
+  - type: textarea
+    id: sources
+    attributes:
+      label: Sources
+      description: One per line - URL | title | date (YYYY-MM-DD). Title and date are optional. At least one https link to a datasheet or warranty document is required.
+      placeholder: https://example.com/warranty.pdf | Limited Warranty (AU/NZ) | 2025-06-10
+    validations:
+      required: true
+
+  - type: textarea
+    id: notes
+    attributes:
+      label: Other notes
+    validations:
+      required: false
+
+  - type: checkboxes
+    id: confirm
+    attributes:
+      label: Confirmation
+      options:
+        - label: The figures come from the manufacturer's documents linked above.
+          required: true

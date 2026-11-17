@@ -1,0 +1,179 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>BatteryLedger Store</title>
+<style>
+  :root { --bg:#111418; --card:#1b1f25; --line:#2b3139; --text:#e6e9ee; --muted:#9aa3ad; --accent:#3fb37f; --warn:#d9a441; }
+  @media (prefers-color-scheme: light) { :root { --bg:#f5f6f8; --card:#fff; --line:#dde1e6; --text:#16191d; --muted:#5d6670; } }
+  * { box-sizing:border-box; }
+  body { margin:0; font:15px/1.5 system-ui, -apple-system, "Segoe UI", Roboto, sans-serif; background:var(--bg); color:var(--text); }
+  header, main { max-width:1100px; margin:0 auto; padding:24px 20px 0; }
+  h1 { margin:0 0 4px; font-size:26px; }
+  header p { margin:0; color:var(--muted); }
+  a { color:var(--accent); }
+  .filters { display:grid; grid-template-columns:2fr 1fr 1fr 1fr; gap:10px; margin:20px 0 12px; }
+  input, select { width:100%; padding:9px 10px; border-radius:8px; border:1px solid var(--line); background:var(--card); color:var(--text); font:inherit; }
+  .count { color:var(--muted); font-size:13px; margin-bottom:10px; }
+  .grid { display:grid; grid-template-columns:repeat(auto-fill, minmax(320px, 1fr)); gap:12px; padding-bottom:40px; }
+  .card { background:var(--card); border:1px solid var(--line); border-radius:12px; padding:14px 16px; }
+  .card h2 { margin:0; font-size:16px; }
+  .brand { color:var(--muted); font-size:13px; }
+  .tags { display:flex; flex-wrap:wrap; gap:6px; margin:8px 0; }
+  .tag { font-size:12px; padding:2px 8px; border-radius:999px; border:1px solid var(--line); color:var(--muted); }
+  .tag.ok { color:var(--accent); border-color:var(--accent); }
+  .tag.warn { color:var(--warn); border-color:var(--warn); }
+  dl { display:grid; grid-template-columns:auto 1fr; gap:2px 12px; margin:6px 0; font-size:13px; }
+  dt { color:var(--muted); }
+  dd { margin:0; font-variant-numeric:tabular-nums; }
+  code { font-size:12px; color:var(--muted); }
+  .tabs { display:flex; gap:6px; margin-top:18px; }
+  .tabs button { font:inherit; padding:6px 14px; border-radius:999px; border:1px solid var(--line); background:var(--card); color:var(--muted); cursor:pointer; }
+  .tabs button.on { color:var(--text); border-color:var(--accent); }
+  .filters.two { grid-template-columns:1fr 1fr; }
+  .hint { color:var(--muted); margin:14px 0 0; }
+  .roles { font-size:12px; margin:6px 0 0; padding-left:16px; }
+  .roles code { word-break:break-all; }
+  @media (max-width:720px) { .filters { grid-template-columns:1fr 1fr; } }
+</style>
+</head>
+<body>
+<header>
+  <h1>BatteryLedger Store</h1>
+  <p>Community battery specifications for the <a href="https://github.com/Roving-Ronin/BatteryLedger">BatteryLedger</a> Home Assistant integration.
+     <a href="https://github.com/Roving-Ronin/BatteryLedger-Store/issues/new?template=spec-submission.yml">Submit a battery</a> ·
+     <a href="index.json">index.json</a></p>
+</header>
+<main>
+  <nav class="tabs">
+    <button id="tab-specs" class="on">Batteries</button>
+    <button id="tab-profiles">Sensor profiles</button>
+  </nav>
+  <section id="view-profiles" hidden>
+    <p class="hint">Sensor profiles tell BatteryLedger which entities from your inverter integration to use, so setup can pick them automatically.</p>
+    <div class="filters two">
+      <select id="pbrand" aria-label="Brand"><option value="">All brands</option></select>
+      <select id="pintegration" aria-label="Integration"><option value="">All integrations</option></select>
+    </div>
+    <div class="count" id="pcount"></div>
+    <div class="grid" id="pgrid"></div>
+  </section>
+  <section id="view-specs">
+  <div class="filters">
+    <input id="q" type="search" placeholder="Search brand or model…" aria-label="Search">
+    <select id="brand" aria-label="Brand"><option value="">All brands</option></select>
+    <select id="region" aria-label="Region"><option value="">All regions</option></select>
+    <select id="phase" aria-label="Phase">
+      <option value="">Any phase</option>
+      <option value="1">Single phase</option>
+      <option value="3">Three phase</option>
+    </select>
+  </div>
+  <div class="count" id="count">Loading…</div>
+  <div class="grid" id="grid"></div>
+  </section>
+</main>
+<script>
+const $ = (id) => document.getElementById(id);
+const esc = (s) => String(s ?? "").replace(/[&<>"']/g, (c) => ({"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;","'":"&#39;"}[c]));
+const fmt = (n) => Number(n).toLocaleString(undefined, { maximumFractionDigits: 2 });
+const BASIS = { charged: "charged energy", discharged: "discharged energy", unspecified: "not stated" };
+let specs = [], profiles = [];
+const ROLE = {
+  discharged_energy: "Lifetime discharged energy", charged_energy: "Lifetime charged energy",
+  rated_capacity: "Rated capacity", soh: "State of health",
+  module_discharged_energy: "Module discharged energy", module_charged_energy: "Module charged energy",
+  module_rated_capacity: "Module rated capacity", module_soc: "Module SoC", module_soh: "Module SoH",
+};
+
+function profileCard(p) {
+  const roles = Object.entries(p.roles).map(([role, rules]) =>
+    `<li>${ROLE[role] ?? esc(role)}: ${rules.map((r) => `${esc(r.level)} <code>${esc(r.unique_id)}</code>`).join(" · ")}</li>`).join("");
+  const link = p.integration.url ? `<a href="${esc(p.integration.url)}" rel="noopener">${esc(p.integration.platform)}</a>` : esc(p.integration.platform);
+  return `<article class="card">
+    <div class="brand">${p.brands.map(esc).join(", ")}</div>
+    <h2>${esc(p.name)}</h2>
+    <div class="tags"><span class="tag">platform: ${link}</span>
+      <span class="tag ${p.verified ? "ok" : "warn"}">${p.verified ? "Verified" : "Unverified"}</span></div>
+    <ul class="roles">${roles}</ul>
+    ${p.notes ? `<p class="brand">${esc(p.notes)}</p>` : ""}
+    <code>${esc(p.id)} · v${p.profile_version}</code>
+  </article>`;
+}
+
+function renderProfiles() {
+  const b = $("pbrand").value, i = $("pintegration").value;
+  const hits = profiles.filter((p) => (!b || p.brands.includes(b)) && (!i || p.id === i));
+  $("pcount").textContent = `${hits.length} of ${profiles.length} sensor profiles`;
+  $("pgrid").innerHTML = hits.map(profileCard).join("");
+}
+
+function show(view) {
+  $("view-specs").hidden = view !== "specs";
+  $("view-profiles").hidden = view !== "profiles";
+  $("tab-specs").classList.toggle("on", view === "specs");
+  $("tab-profiles").classList.toggle("on", view === "profiles");
+}
+
+function throughput(t) {
+  if (t.scope === "none") return "No limit";
+  if (t.scope === "table") return t.table.map((r) => `${r.units}× → ${fmt(r.kwh / 1000)} MWh`).join(", ");
+  return `${fmt(t.kwh / 1000)} MWh ${t.scope === "per_unit" ? "per unit" : "per system"}`;
+}
+
+function card(s) {
+  const c = s.capacity, w = s.warranty;
+  const phases = s.phases.map((p) => (p === "1" ? "Single phase" : "Three phase"));
+  const srcs = s.sources.map((x) => `<a href="${esc(x.url)}" rel="noopener">${esc(x.title || "Source")}</a>`).join(" · ");
+  return `<article class="card">
+    <div class="brand">${esc(s.brand)}</div>
+    <h2>${esc(s.model)}${s.variant ? " " + esc(s.variant) : ""}</h2>
+    <div class="tags">
+      ${s.regions.map((r) => `<span class="tag">${esc(r)}</span>`).join("")}
+      ${phases.map((p) => `<span class="tag">${p}</span>`).join("")}
+      <span class="tag">${esc(s.chemistry)}</span>
+      <span class="tag ${s.verified ? "ok" : "warn"}">${s.verified ? "Verified" : "Unverified"}</span>
+    </div>
+    <dl>
+      <dt>Usable</dt><dd>${fmt(c.usable_kwh)} kWh per ${c.unit === "module" ? "module" : "system"}${c.nominal_kwh ? ` (nominal ${fmt(c.nominal_kwh)})` : ""}</dd>
+      ${c.max_units ? `<dt>Units</dt><dd>${c.min_units ?? 1}–${c.max_units}</dd>` : ""}
+      <dt>Warranty</dt><dd>${fmt(w.years)} years to ${fmt(w.eol_capacity_pct)}%</dd>
+      <dt>Throughput</dt><dd>${throughput(w.throughput)} (${BASIS[w.throughput.basis]})</dd>
+      <dt>Sources</dt><dd>${srcs}</dd>
+    </dl>
+    <code>${esc(s.id)} · v${s.spec_version}</code>
+  </article>`;
+}
+
+function render() {
+  const q = $("q").value.trim().toLowerCase(), b = $("brand").value, r = $("region").value, p = $("phase").value;
+  const hits = specs.filter((s) =>
+    (!b || s.brand === b) &&
+    (!r || s.regions.includes(r) || s.regions.includes("GLOBAL")) &&
+    (!p || s.phases.includes(p)) &&
+    (!q || `${s.brand} ${s.model} ${s.variant ?? ""} ${s.id}`.toLowerCase().includes(q)));
+  $("count").textContent = `${hits.length} of ${specs.length} batteries`;
+  $("grid").innerHTML = hits.map(card).join("");
+}
+
+fetch("index.json", { cache: "no-cache" })
+  .then((r) => r.json())
+  .then((idx) => {
+    specs = idx.specs;
+    for (const x of idx.brands) $("brand").add(new Option(x, x));
+    for (const x of idx.regions) $("region").add(new Option(x, x));
+    ["q", "brand", "region", "phase"].forEach((id) => $(id).addEventListener("input", render));
+    render();
+    profiles = idx.profiles ?? [];
+    for (const x of [...new Set(profiles.flatMap((p) => p.brands))].sort()) $("pbrand").add(new Option(x, x));
+    for (const p of profiles) $("pintegration").add(new Option(p.name, p.id));
+    ["pbrand", "pintegration"].forEach((id) => $(id).addEventListener("input", renderProfiles));
+    renderProfiles();
+    $("tab-specs").addEventListener("click", () => show("specs"));
+    $("tab-profiles").addEventListener("click", () => show("profiles"));
+  })
+  .catch(() => { $("count").textContent = "Couldn't load index.json"; });
+</script>
+</body>
+</html>

@@ -1,0 +1,327 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://roving-ronin.github.io/BatteryLedger-Store/schema/battery-spec.schema.json",
+  "title": "BatteryLedger battery specification",
+  "description": "One battery product (module or all-in-one unit) and its warranty terms for a set of regions.",
+  "type": "object",
+  "additionalProperties": false,
+  "required": [
+    "schema_version",
+    "id",
+    "spec_version",
+    "brand",
+    "model",
+    "regions",
+    "chemistry",
+    "phases",
+    "capacity",
+    "warranty",
+    "sources",
+    "updated"
+  ],
+  "properties": {
+    "schema_version": {
+      "const": 1
+    },
+    "id": {
+      "description": "Unique slug: <brand>-<model>[-<variant>]-<region group>. Must match the file name.",
+      "type": "string",
+      "pattern": "^[a-z0-9]+(-[a-z0-9]+)*$",
+      "maxLength": 96
+    },
+    "spec_version": {
+      "description": "Starts at 1; incremented on every approved change so installs can detect revisions.",
+      "type": "integer",
+      "minimum": 1
+    },
+    "brand": {
+      "type": "string",
+      "minLength": 1,
+      "maxLength": 64,
+      "pattern": "^[^\\u0000-\\u001f]+$"
+    },
+    "model": {
+      "type": "string",
+      "minLength": 1,
+      "maxLength": 96,
+      "pattern": "^[^\\u0000-\\u001f]+$"
+    },
+    "variant": {
+      "type": "string",
+      "maxLength": 64,
+      "pattern": "^[^\\u0000-\\u001f]+$"
+    },
+    "regions": {
+      "description": "ISO 3166-1 alpha-2 codes this warranty applies to, or GLOBAL.",
+      "type": "array",
+      "minItems": 1,
+      "uniqueItems": true,
+      "items": {
+        "type": "string",
+        "pattern": "^([A-Z]{2}|GLOBAL)$"
+      }
+    },
+    "chemistry": {
+      "type": "string",
+      "enum": [
+        "LFP",
+        "NMC",
+        "NCA",
+        "LTO",
+        "Sodium-ion",
+        "Lead-acid",
+        "Other"
+      ]
+    },
+    "phases": {
+      "description": "Grid phase configurations the product can be installed on.",
+      "type": "array",
+      "minItems": 1,
+      "uniqueItems": true,
+      "items": {
+        "type": "string",
+        "enum": [
+          "1",
+          "3"
+        ]
+      }
+    },
+    "capacity": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "unit",
+        "usable_kwh"
+      ],
+      "properties": {
+        "unit": {
+          "description": "module = stackable module (counts multiply); system = all-in-one unit.",
+          "type": "string",
+          "enum": [
+            "module",
+            "system"
+          ]
+        },
+        "nominal_kwh": {
+          "type": "number",
+          "exclusiveMinimum": 0,
+          "maximum": 1000
+        },
+        "usable_kwh": {
+          "description": "Warranted usable energy at beginning of life, per unit.",
+          "type": "number",
+          "exclusiveMinimum": 0,
+          "maximum": 1000
+        },
+        "reported_kwh": {
+          "description": "Capacity the inverter/BMS reports per unit (used for hardware validation), if different from nominal.",
+          "type": "number",
+          "exclusiveMinimum": 0,
+          "maximum": 1000
+        },
+        "min_units": {
+          "type": "integer",
+          "minimum": 1
+        },
+        "max_units": {
+          "type": "integer",
+          "minimum": 1
+        }
+      }
+    },
+    "warranty": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "years",
+        "eol_capacity_pct",
+        "throughput"
+      ],
+      "properties": {
+        "years": {
+          "type": "number",
+          "exclusiveMinimum": 0,
+          "maximum": 30
+        },
+        "eol_capacity_pct": {
+          "description": "Capacity (% of usable at start) warranted at the end of the warranty.",
+          "type": "number",
+          "minimum": 0,
+          "maximum": 100
+        },
+        "throughput": {
+          "type": "object",
+          "additionalProperties": false,
+          "required": [
+            "basis",
+            "scope"
+          ],
+          "properties": {
+            "basis": {
+              "description": "Which energy counter the limit is measured against. 'unspecified' when the warranty document does not say.",
+              "type": "string",
+              "enum": [
+                "charged",
+                "discharged",
+                "unspecified"
+              ]
+            },
+            "scope": {
+              "description": "per_unit: kwh x unit count. per_system: kwh regardless of count. table: kwh looked up by unit count. none: no throughput limit.",
+              "type": "string",
+              "enum": [
+                "per_unit",
+                "per_system",
+                "table",
+                "none"
+              ]
+            },
+            "kwh": {
+              "type": "number",
+              "exclusiveMinimum": 0
+            },
+            "table": {
+              "type": "array",
+              "minItems": 1,
+              "items": {
+                "type": "object",
+                "additionalProperties": false,
+                "required": [
+                  "units",
+                  "kwh"
+                ],
+                "properties": {
+                  "units": {
+                    "type": "integer",
+                    "minimum": 1
+                  },
+                  "kwh": {
+                    "type": "number",
+                    "exclusiveMinimum": 0
+                  }
+                }
+              }
+            }
+          },
+          "allOf": [
+            {
+              "if": {
+                "properties": {
+                  "scope": {
+                    "enum": [
+                      "per_unit",
+                      "per_system"
+                    ]
+                  }
+                }
+              },
+              "then": {
+                "required": [
+                  "kwh"
+                ],
+                "not": {
+                  "required": [
+                    "table"
+                  ]
+                }
+              }
+            },
+            {
+              "if": {
+                "properties": {
+                  "scope": {
+                    "const": "table"
+                  }
+                }
+              },
+              "then": {
+                "required": [
+                  "table"
+                ],
+                "not": {
+                  "required": [
+                    "kwh"
+                  ]
+                }
+              }
+            },
+            {
+              "if": {
+                "properties": {
+                  "scope": {
+                    "const": "none"
+                  }
+                }
+              },
+              "then": {
+                "allOf": [
+                  {
+                    "not": {
+                      "required": [
+                        "kwh"
+                      ]
+                    }
+                  },
+                  {
+                    "not": {
+                      "required": [
+                        "table"
+                      ]
+                    }
+                  }
+                ]
+              }
+            }
+          ]
+        },
+        "notes": {
+          "type": "string",
+          "maxLength": 1000
+        }
+      }
+    },
+    "sources": {
+      "description": "Manufacturer datasheets / warranty documents backing the figures.",
+      "type": "array",
+      "minItems": 1,
+      "items": {
+        "type": "object",
+        "additionalProperties": false,
+        "required": [
+          "url"
+        ],
+        "properties": {
+          "url": {
+            "type": "string",
+            "pattern": "^https://"
+          },
+          "title": {
+            "type": "string",
+            "maxLength": 200
+          },
+          "date": {
+            "type": "string",
+            "format": "date"
+          }
+        }
+      }
+    },
+    "notes": {
+      "type": "string",
+      "maxLength": 2000
+    },
+    "submitted_by": {
+      "description": "GitHub username of the submitter.",
+      "type": "string",
+      "pattern": "^[A-Za-z0-9-]{1,39}$"
+    },
+    "verified": {
+      "description": "Set by a maintainer after checking figures against the sources.",
+      "type": "boolean"
+    },
+    "updated": {
+      "type": "string",
+      "format": "date"
+    }
+  }
+}
