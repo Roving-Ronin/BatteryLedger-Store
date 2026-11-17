@@ -1,0 +1,44 @@
+{
+  "schema_version": 1,
+  "id": "goodwe-lx-u5-4-l-anz",
+  "spec_version": 1,
+  "brand": "GoodWe",
+  "series": "Lynx Home U",
+  "model": "LX U5.4-L",
+  "regions": [
+    "AU",
+    "NZ"
+  ],
+  "chemistry": "LFP",
+  "phases": [
+    "1"
+  ],
+  "capacity": {
+    "unit": "module",
+    "nominal_kwh": 5.4,
+    "usable_kwh": 4.8,
+    "min_units": 1,
+    "max_units": 6
+  },
+  "warranty": {
+    "years": 10,
+    "eol_capacity_pct": 70,
+    "throughput": {
+      "basis": "discharged",
+      "scope": "per_unit",
+      "kwh": 12420
+    },
+    "notes": "70% of usable energy at 10 years or the Minimum Through Output Energy, whichever comes first. 12.42 MWh per module. Throughput is the Minimum Through Output Energy (discharged energy), from the earlier of installation or six months after production."
+  },
+  "sources": [
+    {
+      "url": "https://www.chilliwebsites.com/sitefiles/6944/file/Gw_Lynx_Home_U_Battery_Warranty_Policy.pdf",
+      "title": "GoodWe Limited Warranty, Lynx Series LX U (AU and NZ), Rev 1.1",
+      "date": "2021-10-12"
+    }
+  ],
+  "notes": "Low voltage, for GoodWe ES/EM/SBP inverters: 5.4 kWh modules, 4.8 kWh usable, 1-6 in parallel. GoodWe's ES-family integrations don't report lifetime battery energy; use Energy Manager or choose sensors manually.",
+  "submitted_by": "Roving-Ronin",
+  "verified": false,
+  "updated": "2026-11-18"
+}

@@ -1,0 +1,45 @@
+{
+  "schema_version": 1,
+  "id": "goodwe",
+  "profile_version": 1,
+  "name": "GoodWe (Home Assistant core, or mletenay's custom version)",
+  "integration": {
+    "platform": "goodwe",
+    "url": "https://www.home-assistant.io/integrations/goodwe/"
+  },
+  "brands": [
+    "GoodWe"
+  ],
+  "roles": {
+    "discharged_energy": [
+      {
+        "level": "plant",
+        "unique_id": "goodwe-e_bat_discharge_total-{serial}",
+        "default_entity_ids": [
+          "sensor.goodwe_total_battery_discharge"
+        ]
+      }
+    ],
+    "charged_energy": [
+      {
+        "level": "plant",
+        "unique_id": "goodwe-e_bat_charge_total-{serial}",
+        "default_entity_ids": [
+          "sensor.goodwe_total_battery_charge"
+        ]
+      }
+    ],
+    "soh": [
+      {
+        "level": "plant",
+        "unique_id": "goodwe-battery_soh-{serial}",
+        "default_entity_ids": [
+          "sensor.goodwe_battery_state_of_health"
+        ]
+      }
+    ]
+  },
+  "submitted_by": "Roving-Ronin",
+  "verified": false,
+  "updated": "2026-11-18"
+}

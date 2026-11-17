@@ -1,7 +1,7 @@
 {
   "schema_version": 1,
   "id": "huawei-solar-wlcrs",
-  "profile_version": 1,
+  "profile_version": 2,
   "name": "Huawei Solar (wlcrs)",
   "integration": {
     "platform": "huawei_solar",
@@ -15,6 +15,20 @@
     "discharged_energy": [
       {
         "level": "plant",
+        "unique_id": "{serial}_total_discharged_energy",
+        "default_entity_ids": [
+          "sensor.emma_total_discharged_energy"
+        ]
+      },
+      {
+        "level": "plant",
+        "unique_id": "{serial}_smartlogger_total_energy_discharge_d",
+        "default_entity_ids": [
+          "sensor.smartlogger_total_discharged_energy"
+        ]
+      },
+      {
+        "level": "inverter",
         "unique_id": "{serial}_storage_total_discharge",
         "default_entity_ids": [
           "sensor.batteries_total_discharge"
@@ -24,6 +38,20 @@
     "charged_energy": [
       {
         "level": "plant",
+        "unique_id": "{serial}_total_charged_energy",
+        "default_entity_ids": [
+          "sensor.emma_total_charged_energy"
+        ]
+      },
+      {
+        "level": "plant",
+        "unique_id": "{serial}_smartlogger_total_energy_charged",
+        "default_entity_ids": [
+          "sensor.smartlogger_total_charged_energy"
+        ]
+      },
+      {
+        "level": "inverter",
         "unique_id": "{serial}_storage_total_charge",
         "default_entity_ids": [
           "sensor.batteries_total_charge"
@@ -33,14 +61,30 @@
     "rated_capacity": [
       {
         "level": "plant",
+        "unique_id": "{serial}_rated_ess_capacity",
+        "default_entity_ids": [
+          "sensor.emma_rated_ess_capacity"
+        ]
+      },
+      {
+        "level": "inverter",
         "unique_id": "{serial}_storage_rated_capacity",
         "default_entity_ids": [
           "sensor.batteries_rated_capacity"
+        ]
+      }
+    ],
+    "soh": [
+      {
+        "level": "plant",
+        "unique_id": "{serial}_smartlogger_soh",
+        "default_entity_ids": [
+          "sensor.smartlogger_state_of_health"
         ]
       }
     ]
   },
   "submitted_by": "Roving-Ronin",
   "verified": false,
-  "updated": "2026-11-17"
+  "updated": "2026-11-18"
 }
