@@ -1,11 +1,10 @@
 {
   "schema_version": 1,
-  "id": "huawei-luna2000-5-e0-5-kwh-s0-au",
+  "id": "huawei-luna2000-5-s0-au",
   "spec_version": 1,
   "brand": "Huawei",
   "series": "LUNA2000",
-  "model": "LUNA2000-5-E0 5 kWh",
-  "variant": "S0",
+  "model": "LUNA2000-5-S0",
   "regions": [
     "AU"
   ],
