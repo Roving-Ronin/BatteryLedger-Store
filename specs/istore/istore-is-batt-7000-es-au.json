@@ -1,10 +1,10 @@
 {
   "schema_version": 1,
-  "id": "istore-is-batt-7000-es-6-9-kwh-au",
+  "id": "istore-is-batt-7000-es-au",
   "spec_version": 1,
   "brand": "iStore",
   "series": "iStore Battery",
-  "model": "IS-BATT-7000-ES 6.9 kWh",
+  "model": "IS-BATT-7000-ES",
   "regions": [
     "AU"
   ],
