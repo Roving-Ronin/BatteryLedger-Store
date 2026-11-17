@@ -1,0 +1,48 @@
+{
+  "schema_version": 1,
+  "id": "sungrow-sbh-battery-module-5-0-kwh-warranty-v8-0-au",
+  "spec_version": 1,
+  "brand": "Sungrow",
+  "series": "SBH",
+  "model": "SBH battery module 5.0 kWh",
+  "variant": "Warranty V8.0",
+  "regions": [
+    "AU"
+  ],
+  "chemistry": "LFP",
+  "phases": [
+    "3"
+  ],
+  "capacity": {
+    "unit": "module",
+    "nominal_kwh": 5.0,
+    "usable_kwh": 5.0,
+    "min_units": 4,
+    "max_units": 8
+  },
+  "warranty": {
+    "years": 10,
+    "eol_capacity_pct": 70,
+    "throughput": {
+      "basis": "discharged",
+      "scope": "per_unit",
+      "kwh": 14000
+    },
+    "notes": "70% of initial usable capacity at 10 years from installation (max. 126 months from manufacture) or the cumulative discharging throughput, whichever comes first. Applies to batteries installed on or after 1 October 2024. The warranty says the throughput limit applies to uses other than daily self-consumption and backup (those have unlimited cycles); BatteryLedger applies it in all cases, which is conservative."
+  },
+  "sources": [
+    {
+      "url": "https://solarquotes.com.au/wp-content/uploads/2021/05/WD_202410_Term_Sungrow-HV-Battery-Limited-Warranty_V8.0.pdf",
+      "title": "Sungrow HV Battery Limited Warranty V8.0 (Australia)",
+      "date": "2024-10-01"
+    },
+    {
+      "url": "https://www.solarquotes.com.au/wp-content/uploads/2024/05/sungrow-sbh-datasheet.pdf",
+      "title": "Sungrow SBH datasheet"
+    }
+  ],
+  "notes": "Stack sizes: SBH100-SBH400 = 2-8 modules of 5.0 kWh, 100% usable. For Sungrow three-phase hybrid inverters.",
+  "submitted_by": "Roving-Ronin",
+  "verified": false,
+  "updated": "2026-11-17"
+}

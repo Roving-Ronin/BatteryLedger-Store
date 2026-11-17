@@ -39,7 +39,7 @@ def build() -> dict:
         profiles.append(profile)
     profiles.sort(key=lambda p: p["name"].lower())
     specs.sort(key=lambda s: (s["brand"].lower(), s.get("series", "").lower(),
-                              natural_key(s["model"]), s.get("variant", ""), s["id"]))
+                              natural_key(s["model"]), natural_key(s.get("variant", "")), s["id"]))
     return {
         "index_format": INDEX_FORMAT,
         "schema_version": 1,
