@@ -39,9 +39,11 @@ jobs:
           ISSUE_AUTHOR: ${{ github.event.issue.user.login }}
         run: |
           python scripts/issue_to_spec.py "$RUNNER_TEMP/result.json"
-          echo "ok=$(jq -r .ok "$RUNNER_TEMP/result.json")" >> "$GITHUB_OUTPUT"
-          echo "title=$(jq -r '.title // ""' "$RUNNER_TEMP/result.json")" >> "$GITHUB_OUTPUT"
-          echo "path=$(jq -r '.path // ""' "$RUNNER_TEMP/result.json")" >> "$GITHUB_OUTPUT"
+          {
+            echo "ok=$(jq -r .ok "$RUNNER_TEMP/result.json")"
+            echo "title=$(jq -r '.title // ""' "$RUNNER_TEMP/result.json")"
+            echo "path=$(jq -r '.path // ""' "$RUNNER_TEMP/result.json")"
+          } >> "$GITHUB_OUTPUT"
 
       - name: Re-validate whole store
         if: steps.convert.outputs.ok == 'true'
