@@ -17,7 +17,7 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - name: Remind, then close, issues still waiting for information
-        uses: actions/github-script@v7
+        uses: actions/github-script@v9
         with:
           script: |
             const WARN_AFTER_DAYS = 2, CLOSE_AFTER_DAYS = 5, LABEL = 'question';

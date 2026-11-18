@@ -32,7 +32,7 @@ jobs:
       github.event.issue.user.type != 'Bot'
     steps:
       - name: Close issue when no template was used
-        uses: actions/github-script@v7
+        uses: actions/github-script@v9
         with:
           script: |
             const TEMPLATES = {"bug": {"file": "bug_report.yml", "name": "🐛 Store problem", "headings": ["Which part?", "Current Behaviour", "Expected Behaviour", "Spec or profile ID", "Browser / App"], "distinctive": ["Expected Behaviour", "Spec or profile ID", "Browser / App"]}, "enhancement": {"file": "feature_request.yml", "name": "✨ Feature request", "headings": ["Which part?", "Current Behaviour", "Desired Behaviour", "Context / Reason"], "distinctive": ["Desired Behaviour", "Context / Reason"]}};
@@ -87,7 +87,7 @@ jobs:
       github.event.issue.pull_request == null
     steps:
       - name: Restore the label the issue form would have applied
-        uses: actions/github-script@v7
+        uses: actions/github-script@v9
         with:
           script: |
             const TEMPLATES = {"bug": {"file": "bug_report.yml", "name": "🐛 Store problem", "headings": ["Which part?", "Current Behaviour", "Expected Behaviour", "Spec or profile ID", "Browser / App"], "distinctive": ["Expected Behaviour", "Spec or profile ID", "Browser / App"]}, "enhancement": {"file": "feature_request.yml", "name": "✨ Feature request", "headings": ["Which part?", "Current Behaviour", "Desired Behaviour", "Context / Reason"], "distinctive": ["Desired Behaviour", "Context / Reason"]}};
@@ -126,7 +126,7 @@ jobs:
        github.event.comment.author_association == 'COLLABORATOR')
     steps:
       - name: Clear the question label
-        uses: actions/github-script@v7
+        uses: actions/github-script@v9
         with:
           script: |
             const { owner, repo } = context.repo;
@@ -146,7 +146,7 @@ jobs:
       contains(github.event.issue.labels.*.name, 'question')
     steps:
       - name: Hand back to the maintainer
-        uses: actions/github-script@v7
+        uses: actions/github-script@v9
         with:
           script: |
             const { owner, repo } = context.repo;
