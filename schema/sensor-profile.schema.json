@@ -101,7 +101,47 @@
         },
         "install_date": {
           "$ref": "#/$defs/system_rules",
-          "description": "A date entity holding the battery's install / warranty start date; pre-fills setup."
+          "description": "A date helper holding the first battery group's install / warranty start date; pre-fills setup."
+        },
+        "install_cost": {
+          "$ref": "#/$defs/system_rules",
+          "description": "A number helper holding what the first battery group cost; pre-fills setup."
+        },
+        "install_date_2": {
+          "$ref": "#/$defs/system_rules",
+          "description": "Install / warranty start date of batteries added later (the second battery group)."
+        },
+        "install_cost_2": {
+          "$ref": "#/$defs/system_rules",
+          "description": "What the batteries added later (the second battery group) cost."
+        },
+        "brand": {
+          "$ref": "#/$defs/system_rules",
+          "description": "An entity naming the system's brand (e.g. an inverter brand selector). Its rule's `values` maps each state to the battery brands it can mean."
+        },
+        "module_count": {
+          "$ref": "#/$defs/system_rules",
+          "description": "Number of battery modules (per tower when tower_count is given). Used to suggest the battery model and unit count."
+        },
+        "tower_count": {
+          "$ref": "#/$defs/system_rules",
+          "description": "Number of battery towers / stacks, each with module_count modules."
+        },
+        "inverter_model": {
+          "$ref": "#/$defs/inverter_rules",
+          "description": "Inverter model text (e.g. 'SigenStor EC 30.0 TP AU'), per inverter. Its words are matched against spec model lines (series)."
+        },
+        "inverter_pack_count": {
+          "$ref": "#/$defs/inverter_rules",
+          "description": "Number of battery modules on each inverter."
+        },
+        "inverter_rated_capacity": {
+          "$ref": "#/$defs/inverter_rules",
+          "description": "Rated battery capacity on each inverter (kWh or Wh). With the pack count it gives the capacity per module."
+        },
+        "pack_serial": {
+          "$ref": "#/$defs/inverter_rules",
+          "description": "One rule per battery pack position on an inverter; positions with a serial number are counted as installed modules. The serial itself is never stored."
         }
       }
     },
@@ -164,6 +204,20 @@
             "description": "Entity registry platform for this rule, when it differs from integration.platform (e.g. input_datetime for a helper).",
             "type": "string",
             "pattern": "^[a-z0-9_]+$"
+          },
+          "values": {
+            "description": "For the brand role: entity state -> battery brands (as used in specs) it can mean. States not listed fall back to the profile's brands.",
+            "type": "object",
+            "additionalProperties": {
+              "type": "array",
+              "minItems": 1,
+              "uniqueItems": true,
+              "items": {
+                "type": "string",
+                "minLength": 1,
+                "maxLength": 64
+              }
+            }
           }
         }
       }
@@ -195,6 +249,42 @@
               "pattern": "^[a-z_]+\\.[a-z0-9_<>]+$",
               "maxLength": 120
             }
+          }
+        }
+      }
+    },
+    "inverter_rules": {
+      "description": "Per-inverter rules: every match is kept, one set per inverter (the placeholders other than entry/prefix/plant/mac tell inverters apart).",
+      "type": "array",
+      "minItems": 1,
+      "items": {
+        "type": "object",
+        "additionalProperties": false,
+        "required": [
+          "level",
+          "unique_id"
+        ],
+        "properties": {
+          "level": {
+            "const": "inverter"
+          },
+          "unique_id": {
+            "$ref": "#/$defs/template"
+          },
+          "default_entity_ids": {
+            "description": "Entity IDs the integration creates for this sensor with its default naming, newest first, shown on the Store site. Not used for matching (that's unique_id). Use <serial> etc. for install-specific parts.",
+            "type": "array",
+            "minItems": 1,
+            "items": {
+              "type": "string",
+              "pattern": "^[a-z_]+\\.[a-z0-9_<>]+$",
+              "maxLength": 120
+            }
+          },
+          "platform": {
+            "description": "Entity registry platform for this rule, when it differs from integration.platform (e.g. input_datetime for a helper).",
+            "type": "string",
+            "pattern": "^[a-z0-9_]+$"
           }
         }
       }

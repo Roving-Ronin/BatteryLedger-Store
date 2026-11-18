@@ -83,6 +83,11 @@ def check_profile(profile: dict, path: Path | None = None) -> list[str]:
             names = PLACEHOLDER_RE.findall(rule["unique_id"])
             if len(names) != len(set(names)):
                 errors.append(f"roles/{role}/{i}: each placeholder may appear only once")
+            for state, brands in rule.get("values", {}).items():
+                if role != "brand":
+                    errors.append(f"roles/{role}/{i}: only the brand role has values")
+                elif extra := sorted(set(brands) - set(profile["brands"])):
+                    errors.append(f"roles/brand/{i}/values/{state}: {', '.join(extra)} not in the profile's brands")
     return errors
 
 

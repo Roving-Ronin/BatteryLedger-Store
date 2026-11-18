@@ -1,7 +1,7 @@
 {
   "schema_version": 1,
   "id": "energy-manager",
-  "profile_version": 6,
+  "profile_version": 7,
   "name": "Energy Manager",
   "integration": {
     "platform": "mqtt",
@@ -62,6 +62,81 @@
         "unique_id": "battery_install_date",
         "default_entity_ids": [
           "input_datetime.battery_install_date"
+        ]
+      }
+    ],
+    "brand": [
+      {
+        "level": "plant",
+        "platform": "input_select",
+        "unique_id": "inverter_brand",
+        "default_entity_ids": [
+          "input_select.inverter_brand"
+        ],
+        "values": {
+          "sungrow": [
+            "Sungrow"
+          ],
+          "sigenergy": [
+            "Sigenergy"
+          ],
+          "goodwe": [
+            "GoodWe"
+          ],
+          "goodwe_et": [
+            "GoodWe"
+          ],
+          "goodwe_int": [
+            "GoodWe"
+          ],
+          "alphaess": [
+            "AlphaESS"
+          ],
+          "fronius": [
+            "Fronius",
+            "BYD"
+          ],
+          "huawei": [
+            "Huawei",
+            "iStore"
+          ],
+          "istore": [
+            "iStore",
+            "Huawei"
+          ],
+          "deye": [
+            "Deye"
+          ]
+        }
+      }
+    ],
+    "install_cost": [
+      {
+        "level": "plant",
+        "platform": "input_number",
+        "unique_id": "battery_install_cost",
+        "default_entity_ids": [
+          "input_number.battery_install_cost"
+        ]
+      }
+    ],
+    "install_date_2": [
+      {
+        "level": "plant",
+        "platform": "input_datetime",
+        "unique_id": "battery_install_date_2",
+        "default_entity_ids": [
+          "input_datetime.battery_install_date_2"
+        ]
+      }
+    ],
+    "install_cost_2": [
+      {
+        "level": "plant",
+        "platform": "input_number",
+        "unique_id": "battery_install_cost_2",
+        "default_entity_ids": [
+          "input_number.battery_install_cost_2"
         ]
       }
     ]

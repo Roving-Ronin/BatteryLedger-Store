@@ -59,8 +59,17 @@ Sensors are matched by their **entity registry unique ID**, never by entity ID (
 | `brands` | Battery brands the profile applies to |
 | `roles.<role>` | Matching rules in order of preference, each with a `level` (`plant`, `inverter` or `module`), a `unique_id` template (used for matching) and `default_entity_ids` (the entity IDs the integration creates by default, newest first; shown on the Store site) |
 
-Roles: `discharged_energy`, `charged_energy`, `rated_capacity`, `soh`, and per-module
-`module_discharged_energy`, `module_charged_energy`, `module_rated_capacity`, `module_soc`, `module_soh`.
+Roles:
+- **Sensors:** `discharged_energy`, `charged_energy`, `rated_capacity`, `soh`, and per-module
+  `module_discharged_energy`, `module_charged_energy`, `module_rated_capacity`, `module_soc`, `module_soh`.
+- **Suggesting the battery** (setup's *Detect*): `module_count` and `tower_count`, and per inverter (level
+  `inverter`, every match kept) `inverter_model`, `inverter_pack_count`, `inverter_rated_capacity` and
+  `pack_serial` (one rule per pack position; positions with a serial count as installed, the serial is never
+  stored). `brand` names the system's brand; its rule's `values` map each state to the battery brands it can mean
+  (e.g. Energy Manager's `fronius` → Fronius, BYD).
+- **Pre-filling setup:** `install_date`, `install_cost` (first battery group), `install_date_2`, `install_cost_2`
+  (batteries added later). A rule's `platform` names a helper's platform (`input_datetime`, `input_number`,
+  `input_select`); helpers set up in YAML have their ID as unique ID.
 
 Templates use placeholders for the parts that differ between installs, so no profile ever contains a
 setup ID, station ID or serial number: `{entry}`, `{device}`, `{prefix}`, `{plant}`, `{inverter}`,

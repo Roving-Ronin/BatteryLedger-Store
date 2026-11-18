@@ -1,7 +1,7 @@
 {
   "schema_version": 1,
   "id": "byd-battery-box-redpomodoro",
-  "profile_version": 1,
+  "profile_version": 2,
   "name": "BYD Battery Box (redpomodoro)",
   "integration": {
     "platform": "byd_battery_box",
@@ -44,6 +44,24 @@
         "unique_id": "bydb_soh",
         "default_entity_ids": [
           "sensor.battery_management_unit_state_of_health"
+        ]
+      }
+    ],
+    "module_count": [
+      {
+        "level": "plant",
+        "unique_id": "bydb_modules",
+        "default_entity_ids": [
+          "sensor.battery_management_unit_modules"
+        ]
+      }
+    ],
+    "tower_count": [
+      {
+        "level": "plant",
+        "unique_id": "bydb_towers",
+        "default_entity_ids": [
+          "sensor.battery_management_unit_towers"
         ]
       }
     ]

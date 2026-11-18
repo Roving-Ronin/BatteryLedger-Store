@@ -1,7 +1,7 @@
 {
   "schema_version": 1,
   "id": "sigen-local-modbus",
-  "profile_version": 2,
+  "profile_version": 3,
   "name": "Sigenergy ESS (TypQxQ Local Modbus)",
   "integration": {
     "platform": "sigen",
@@ -76,9 +76,36 @@
           "sensor.sigen_inverter_battery_state_of_health"
         ]
       }
+    ],
+    "inverter_model": [
+      {
+        "level": "inverter",
+        "unique_id": "{entry}_{device}_inverter_model_type",
+        "default_entity_ids": [
+          "sensor.sigen_inverter_model_type"
+        ]
+      }
+    ],
+    "inverter_pack_count": [
+      {
+        "level": "inverter",
+        "unique_id": "{entry}_{device}_inverter_pack_count",
+        "default_entity_ids": [
+          "sensor.sigen_inverter_pack_count"
+        ]
+      }
+    ],
+    "inverter_rated_capacity": [
+      {
+        "level": "inverter",
+        "unique_id": "{entry}_{device}_inverter_rated_battery_capacity",
+        "default_entity_ids": [
+          "sensor.sigen_inverter_rated_battery_capacity"
+        ]
+      }
     ]
   },
   "submitted_by": "Roving-Ronin",
   "verified": false,
-  "updated": "2026-11-17"
+  "updated": "2026-11-18"
 }

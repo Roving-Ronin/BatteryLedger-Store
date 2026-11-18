@@ -1,7 +1,7 @@
 {
   "schema_version": 1,
   "id": "huawei-solar-wlcrs",
-  "profile_version": 2,
+  "profile_version": 3,
   "name": "Huawei Solar (wlcrs)",
   "integration": {
     "platform": "huawei_solar",
@@ -81,6 +81,41 @@
         "default_entity_ids": [
           "sensor.smartlogger_state_of_health"
         ]
+      }
+    ],
+    "inverter_rated_capacity": [
+      {
+        "level": "inverter",
+        "unique_id": "{serial}_storage_rated_capacity",
+        "default_entity_ids": [
+          "sensor.batteries_rated_capacity"
+        ]
+      }
+    ],
+    "pack_serial": [
+      {
+        "level": "inverter",
+        "unique_id": "{serial}_storage_unit_1_battery_pack_1_serial_number"
+      },
+      {
+        "level": "inverter",
+        "unique_id": "{serial}_storage_unit_1_battery_pack_2_serial_number"
+      },
+      {
+        "level": "inverter",
+        "unique_id": "{serial}_storage_unit_1_battery_pack_3_serial_number"
+      },
+      {
+        "level": "inverter",
+        "unique_id": "{serial}_storage_unit_2_battery_pack_1_serial_number"
+      },
+      {
+        "level": "inverter",
+        "unique_id": "{serial}_storage_unit_2_battery_pack_2_serial_number"
+      },
+      {
+        "level": "inverter",
+        "unique_id": "{serial}_storage_unit_2_battery_pack_3_serial_number"
       }
     ]
   },

@@ -1,7 +1,7 @@
 {
   "schema_version": 1,
   "id": "alphaess-modbus-senalse",
-  "profile_version": 1,
+  "profile_version": 2,
   "name": "AlphaESS Modbus TCP (senalse)",
   "integration": {
     "platform": "alphaess_modbus",
@@ -44,6 +44,15 @@
         "unique_id": "{entry}_soh_battery",
         "default_entity_ids": [
           "sensor.alphaess_inverter_battery_state_of_health"
+        ]
+      }
+    ],
+    "module_count": [
+      {
+        "level": "plant",
+        "unique_id": "{entry}_battery_module_count",
+        "default_entity_ids": [
+          "sensor.alphaess_inverter_battery_module_count"
         ]
       }
     ]
