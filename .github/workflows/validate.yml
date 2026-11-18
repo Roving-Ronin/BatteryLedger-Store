@@ -18,7 +18,7 @@ jobs:
         with:
           persist-credentials: false
       # Settings in ruff.toml. Each finding shows as an annotation on the line it's about.
-      - uses: astral-sh/ruff-action@v4
+      - uses: astral-sh/ruff-action@v4.1.0
         with:
           version: "0.16.9"  # pinned so a new Ruff release can't fail a build by itself
           args: check --output-format=github
