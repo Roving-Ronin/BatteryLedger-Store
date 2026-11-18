@@ -1,6 +1,7 @@
 name: Security
 
-# zizmor audits the workflows (injection, permissions, credentials); CodeQL scans the code and workflows
+# actionlint checks the workflows' syntax and zizmor their security (injection, permissions,
+# credentials); CodeQL scans the code and workflows
 # and reports in the Security tab. Weekly as well, so new CodeQL queries reach unchanged code.
 on:
   push:
@@ -27,6 +28,23 @@ jobs:
         with:
           advanced-security: false
           annotations: true
+
+  actionlint:
+    name: Workflow syntax (actionlint)
+    runs-on: ubuntu-latest
+    permissions:
+      contents: read
+    steps:
+      - uses: actions/checkout@v7
+        with:
+          persist-credentials: false
+      - uses: actions/setup-python@v7
+        with:
+          python-version: "3.13"
+      # Catches keys in the wrong place (e.g. permissions under a trigger), unknown inputs and bad
+      # expressions, which zizmor doesn't check. Pinned so a new release can't fail a build by itself.
+      - run: pip install actionlint-py==1.7.12.25
+      - run: actionlint
 
   codeql:
     name: CodeQL (${{ matrix.language }})
