@@ -36,6 +36,7 @@ jobs:
       - name: Checkout full history
         uses: actions/checkout@v7
         with:
+          persist-credentials: false
           fetch-depth: 0
 
       - name: Check the secrets are set
@@ -86,8 +87,9 @@ jobs:
           }
 
       - name: Create zip (git bundle + source snapshot)
+        env:
+          REPO: ${{ github.event.repository.name }}
         run: |
-          REPO="${{ github.event.repository.name }}"
           BASE="${PREFIX}$(TZ=Australia/Sydney date +'%Y-%m-%d_%H%M%S')"
           STAGE="$RUNNER_TEMP/$BASE"
           mkdir -p "$STAGE/source"
@@ -105,7 +107,7 @@ jobs:
           git archive HEAD | tar -x -C "$STAGE/source"
 
           cat > "$STAGE/RESTORE.txt" <<EOF
-          Backup of github.com/${{ github.repository }}
+          Backup of github.com/${GITHUB_REPOSITORY}
           Created: $(TZ=Australia/Sydney date +'%Y-%m-%d %H:%M:%S %Z')
           Commit:  $(git rev-parse HEAD) (main)
 

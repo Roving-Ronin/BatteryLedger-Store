@@ -77,8 +77,8 @@ class SubmissionError(Exception):
 def parse_form_sections(body: str) -> dict[str, str]:
     sections: dict[str, str] = {}
     parts = re.split(r"^### +(.+?)\s*$", body, flags=re.MULTILINE)
-    # parts = [preamble, label1, content1, label2, content2, ...]
-    for label, content in zip(parts[1::2], parts[2::2]):
+    # parts = [preamble, label1, content1, label2, content2, ...]: always one content per label
+    for label, content in zip(parts[1::2], parts[2::2], strict=True):
         value = content.strip()
         sections[label.strip()] = "" if value == NO_RESPONSE else value
     return sections

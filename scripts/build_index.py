@@ -10,7 +10,7 @@ import json
 import re
 import shutil
 import sys
-from datetime import datetime, timezone
+from datetime import UTC, datetime
 from pathlib import Path
 
 from common import PROFILE_SCHEMA_PATH, SCHEMA_PATH, check_profile, check_spec, load_all_profiles, load_all_specs
@@ -43,7 +43,7 @@ def build() -> dict:
     return {
         "index_format": INDEX_FORMAT,
         "schema_version": 1,
-        "generated": datetime.now(timezone.utc).replace(microsecond=0).isoformat(),
+        "generated": datetime.now(UTC).replace(microsecond=0).isoformat(),
         "count": len(specs),
         "brands": sorted({s["brand"] for s in specs}, key=str.lower),
         "regions": sorted({r for s in specs for r in s["regions"]}),
