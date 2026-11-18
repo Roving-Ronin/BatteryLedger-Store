@@ -16,7 +16,7 @@ pip install -r scripts/requirements.txt pytest
 python scripts/validate.py          # every spec and profile
 python scripts/build_index.py _site # what Pages publishes
 python -m pytest -q tests
-pip install ruff zizmor && ruff check . && zizmor .   # lint + workflow security audit
+pip install ruff zizmor actionlint-py && ruff check . && zizmor . && actionlint   # lint + workflow checks
 ```
 
 CI: Validate (Ruff, specs and profiles, tests, index build) on pushes to main and PRs; Security (zizmor,
