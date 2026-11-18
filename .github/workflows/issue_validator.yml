@@ -10,11 +10,12 @@ name: Issue Validator
 on:
   issues:
     types: [opened, edited, reopened]
+  # zizmor: ignore[dangerous-triggers] only reads the comment through github-script (never in a
+  # shell command), checks out no code, and needs no secrets beyond the issues token.
   issue_comment:
     types: [created]
 
-permissions:
-  issues: write
+permissions: {}
 
 concurrency:
   group: issue-validator-${{ github.event.issue.number }}
@@ -22,6 +23,8 @@ concurrency:
 
 jobs:
   close-templateless-issues:
+    permissions:
+      issues: write
     runs-on: ubuntu-latest
     if: >
       github.event_name == 'issues' &&
@@ -78,6 +81,8 @@ jobs:
             }
 
   restore-template-label:
+    permissions:
+      issues: write
     runs-on: ubuntu-latest
     # Issue-form labels are applied only through the web form. An issue created over the
     # API with a pasted template body arrives unlabelled; restore it from its headings.
@@ -116,6 +121,8 @@ jobs:
             console.log(`#${issue.number}: restored "${best}".`);
 
   handle-fine-command:
+    permissions:
+      issues: write
     runs-on: ubuntu-latest
     # Maintainers comment `/fine` to clear the needs-info flag by hand.
     if: >
@@ -135,6 +142,8 @@ jobs:
             await github.rest.reactions.createForIssueComment({ owner, repo, comment_id: context.payload.comment.id, content: '+1' });
 
   handle-reporter-response:
+    permissions:
+      issues: write
     runs-on: ubuntu-latest
     # A reporter answering in a comment (rather than editing the post) shouldn't be
     # auto-closed: clear the flag and hand it to the maintainer.

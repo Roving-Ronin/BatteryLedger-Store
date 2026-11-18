@@ -6,10 +6,7 @@ on:
     paths: ["specs/**", "profiles/**", "schema/**", "scripts/**", "site/**"]
   workflow_dispatch:
 
-permissions:
-  contents: read
-  pages: write
-  id-token: write
+permissions: {}
 
 concurrency:
   group: pages
@@ -17,9 +14,13 @@ concurrency:
 
 jobs:
   build:
+    permissions:
+      contents: read
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v7
+        with:
+          persist-credentials: false
       - uses: actions/setup-python@v7
         with:
           python-version: "3.12"
@@ -35,6 +36,9 @@ jobs:
           path: _site
 
   deploy:
+    permissions:
+      pages: write
+      id-token: write
     needs: build
     runs-on: ubuntu-latest
     environment:

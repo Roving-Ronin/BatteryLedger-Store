@@ -5,3 +5,15 @@ updates:
     directory: '/'
     schedule:
       interval: 'weekly'
+    # Wait a week before taking a new release, so a broken or compromised one is usually caught first
+    cooldown:
+      default-days: 7
+
+  # Keep the validation scripts' requirements up to date
+  - package-ecosystem: 'pip'
+    directory: '/scripts'
+    schedule:
+      interval: 'weekly'
+    # Wait a week before taking a new release, so a broken or compromised one is usually caught first
+    cooldown:
+      default-days: 7

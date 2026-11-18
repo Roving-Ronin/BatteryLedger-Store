@@ -4,6 +4,8 @@ name: Reopen Own Issue
 # closed themselves; commenting `/reopen` on your own closed issue reopens it.
 
 on:
+  # zizmor: ignore[dangerous-triggers] only reads the comment through github-script (never in a
+  # shell command), checks out no code, and needs no secrets beyond the issues token.
   issue_comment:
     types: [created]
 

@@ -16,7 +16,19 @@ pip install -r scripts/requirements.txt pytest
 python scripts/validate.py          # every spec and profile
 python scripts/build_index.py _site # what Pages publishes
 python -m pytest -q tests
+pip install ruff zizmor && ruff check . && zizmor .   # lint + workflow security audit
 ```
+
+CI: Validate (Ruff, specs and profiles, tests, index build) on pushes to main and PRs; Security (zizmor,
+CodeQL) on pushes, PRs and weekly.
+
+## Workflow security
+- Never put `${{ ... }}` expressions inside `run:` scripts: pass them through `env:` and use `"$VAR"`.
+  The issue body is untrusted: `submission.yml` passes it via `ISSUE_BODY`; keep it that way.
+- `permissions: {}` at workflow level where jobs differ, and grant each job only what it needs.
+- `actions/checkout` with `persist-credentials: false`, unless the job pushes (`submission.yml`, marked
+  `# zizmor: ignore[artipacked]`).
+- Actions are pinned by tag (`.github/zizmor.yml`), kept current by Dependabot.
 
 ## Rules
 

@@ -4,16 +4,31 @@ on:
   pull_request:
   push:
     branches: [main]
-    paths: ["specs/**", "profiles/**", "schema/**", "scripts/**"]
+    paths: ["specs/**", "profiles/**", "schema/**", "scripts/**", "tests/**", "ruff.toml"]
 
 permissions:
   contents: read
 
 jobs:
+  ruff:
+    name: Ruff
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v7
+        with:
+          persist-credentials: false
+      # Settings in ruff.toml. Each finding shows as an annotation on the line it's about.
+      - uses: astral-sh/ruff-action@v4.1.0
+        with:
+          version: "0.16.9"  # pinned so a new Ruff release can't fail a build by itself
+          args: check --output-format=github
+
   validate:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v7
+        with:
+          persist-credentials: false
       - uses: actions/setup-python@v7
         with:
           python-version: "3.12"
