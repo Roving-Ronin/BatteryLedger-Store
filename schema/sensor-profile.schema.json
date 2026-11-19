@@ -332,6 +332,12 @@
             "description": "Entity registry platform for this rule, when it differs from integration.platform (e.g. input_datetime for a helper).",
             "type": "string",
             "pattern": "^[a-z0-9_]+$"
+          },
+          "tower": {
+            "description": "For pack_serial: which battery tower (stack) on the inverter this pack position is in, counted from 1. Detect then offers one battery group per tower. Leave out when the integration doesn't tell towers apart.",
+            "type": "integer",
+            "minimum": 1,
+            "maximum": 8
           }
         }
       }
