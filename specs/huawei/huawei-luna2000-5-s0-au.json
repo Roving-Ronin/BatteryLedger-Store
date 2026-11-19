@@ -18,7 +18,7 @@
     "nominal_kwh": 5.0,
     "usable_kwh": 5.0,
     "min_units": 1,
-    "max_units": 9
+    "max_units": 18
   },
   "warranty": {
     "years": 10,
@@ -41,8 +41,8 @@
       "title": "Huawei LUNA2000-5/10/15-S0 datasheet (AU)"
     }
   ],
-  "notes": "LUNA2000-5/10/15-S0: one LUNA2000-5KW-C0 power module with 1-3 LUNA2000-5-E0 battery modules of 5 kWh, 100% usable; up to 3 modules per inverter and normally up to 3 inverters in a plant. No longer sold in Australia (since Feb 2024); iStore modules are compatible.",
+  "notes": "LUNA2000-5/10/15-S0: one LUNA2000-5KW-C0 power module with 1-3 LUNA2000-5-E0 battery modules of 5 kWh, 100% usable; up to 2 towers (6 modules) per inverter and up to 3 cascaded inverters (18 modules, 90 kWh). S0 and S1 can't be mixed on one inverter or in one cascaded system. No longer sold in Australia (since Feb 2024); iStore modules are compatible.",
   "submitted_by": "Roving-Ronin",
   "verified": false,
-  "updated": "2026-11-17"
+  "updated": "2026-11-19"
 }
