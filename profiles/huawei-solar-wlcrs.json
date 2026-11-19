@@ -1,7 +1,7 @@
 {
   "schema_version": 1,
   "id": "huawei-solar-wlcrs",
-  "profile_version": 4,
+  "profile_version": 5,
   "name": "Huawei Solar (wlcrs)",
   "integration": {
     "platform": "huawei_solar",
@@ -95,27 +95,33 @@
     "pack_serial": [
       {
         "level": "inverter",
-        "unique_id": "{serial}_storage_unit_1_battery_pack_1_serial_number"
+        "unique_id": "{serial}_storage_unit_1_battery_pack_1_serial_number",
+        "tower": 1
       },
       {
         "level": "inverter",
-        "unique_id": "{serial}_storage_unit_1_battery_pack_2_serial_number"
+        "unique_id": "{serial}_storage_unit_1_battery_pack_2_serial_number",
+        "tower": 1
       },
       {
         "level": "inverter",
-        "unique_id": "{serial}_storage_unit_1_battery_pack_3_serial_number"
+        "unique_id": "{serial}_storage_unit_1_battery_pack_3_serial_number",
+        "tower": 1
       },
       {
         "level": "inverter",
-        "unique_id": "{serial}_storage_unit_2_battery_pack_1_serial_number"
+        "unique_id": "{serial}_storage_unit_2_battery_pack_1_serial_number",
+        "tower": 2
       },
       {
         "level": "inverter",
-        "unique_id": "{serial}_storage_unit_2_battery_pack_2_serial_number"
+        "unique_id": "{serial}_storage_unit_2_battery_pack_2_serial_number",
+        "tower": 2
       },
       {
         "level": "inverter",
-        "unique_id": "{serial}_storage_unit_2_battery_pack_3_serial_number"
+        "unique_id": "{serial}_storage_unit_2_battery_pack_3_serial_number",
+        "tower": 2
       }
     ]
   },

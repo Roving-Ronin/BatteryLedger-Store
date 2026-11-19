@@ -65,7 +65,8 @@ Roles:
 - **Suggesting the battery** (setup's *Detect*): `module_count` and `tower_count`, and per inverter (level
   `inverter`, every match kept) `inverter_model`, `inverter_pack_count`, `inverter_rated_capacity` and
   `pack_serial` (one rule per pack position; positions with a serial count as installed, the serial is never
-  stored). `brand` names the system's brand; its rule's `values` map each state to the battery brands it can mean
+  stored; a rule's optional `tower` says which battery tower on the inverter the position is in, so Detect can
+  offer a battery group per tower). `brand` names the system's brand; its rule's `values` map each state to the battery brands it can mean
   (e.g. Energy Manager's `fronius` → Fronius, BYD).
 - **`unavailable`** (optional, beside `roles`): sensors the integration has a rule for but can't provide for some
   battery brands, e.g. `"unavailable": {"soh": ["Huawei", "iStore"]}` for Huawei Solar, where SoH only comes from
