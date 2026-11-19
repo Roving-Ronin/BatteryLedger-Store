@@ -17,7 +17,7 @@
     "nominal_kwh": 5.0,
     "usable_kwh": 5.0,
     "min_units": 4,
-    "max_units": 8
+    "max_units": 32
   },
   "warranty": {
     "years": 10,
@@ -40,8 +40,8 @@
       "title": "Sungrow SBH datasheet"
     }
   ],
-  "notes": "Stack sizes: SBH100-SBH400 = 2-8 modules of 5.0 kWh, 100% usable. For Sungrow three-phase hybrid inverters.",
+  "notes": "Stack sizes: SBH100-SBH400 = 2-8 modules of 5.0 kWh, 100% usable. For Sungrow three-phase hybrid inverters. Up to 4 stacks in parallel (SJR combiner), 32 modules, 160 kWh; modules per stack depend on the inverter.",
   "submitted_by": "Roving-Ronin",
   "verified": false,
-  "updated": "2026-11-17"
+  "updated": "2026-11-19"
 }

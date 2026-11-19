@@ -1,7 +1,7 @@
 {
   "schema_version": 1,
   "id": "sigenergy2mqtt",
-  "profile_version": 2,
+  "profile_version": 3,
   "name": "sigenergy2mqtt (MQTT)",
   "integration": {
     "platform": "mqtt",
@@ -94,9 +94,27 @@
           "sensor.sigen_0_cloud_4_<serial>_battery_soc"
         ]
       }
+    ],
+    "inverter_model": [
+      {
+        "level": "inverter",
+        "unique_id": "{prefix}_{plant}_{inverter}_30500",
+        "default_entity_ids": [
+          "sensor.sigen_0_inverter_1_model"
+        ]
+      }
+    ],
+    "inverter_rated_capacity": [
+      {
+        "level": "inverter",
+        "unique_id": "{prefix}_{plant}_{inverter}_30548",
+        "default_entity_ids": [
+          "sensor.sigen_0_inverter_1_rated_battery_capacity"
+        ]
+      }
     ]
   },
   "submitted_by": "Roving-Ronin",
   "verified": false,
-  "updated": "2026-11-17"
+  "updated": "2026-11-19"
 }
