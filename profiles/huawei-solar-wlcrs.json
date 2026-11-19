@@ -1,7 +1,7 @@
 {
   "schema_version": 1,
   "id": "huawei-solar-wlcrs",
-  "profile_version": 3,
+  "profile_version": 4,
   "name": "Huawei Solar (wlcrs)",
   "integration": {
     "platform": "huawei_solar",
@@ -119,7 +119,13 @@
       }
     ]
   },
+  "unavailable": {
+    "soh": [
+      "Huawei",
+      "iStore"
+    ]
+  },
   "submitted_by": "Roving-Ronin",
   "verified": false,
-  "updated": "2026-11-18"
+  "updated": "2026-11-19"
 }

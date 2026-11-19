@@ -134,7 +134,9 @@ function profileCard(p) {
         (ids.length ? `<code>${esc(ids[0])}</code>` : "") +
         (older ? `<div class="older">older versions: ${older}</div>` : "") + `</div>`;
     }).join("");
-    return `<li><strong>${ROLE[role] ?? esc(role)}</strong>${lines}</li>`;
+    const notFor = p.unavailable?.[role];
+    const unavailable = (notFor ? `<div class="older">not available for ${notFor.map(esc).join(", ")} batteries</div>` : "");
+    return `<li><strong>${ROLE[role] ?? esc(role)}</strong>${lines}${unavailable}</li>`;
   }).join("");
   const link = p.integration.url ? `<a href="${esc(p.integration.url)}" rel="noopener">${esc(p.name)}</a>` : esc(p.name);
   return `<article class="card wide">

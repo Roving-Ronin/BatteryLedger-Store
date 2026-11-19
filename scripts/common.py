@@ -88,6 +88,11 @@ def check_profile(profile: dict, path: Path | None = None) -> list[str]:
                     errors.append(f"roles/{role}/{i}: only the brand role has values")
                 elif extra := sorted(set(brands) - set(profile["brands"])):
                     errors.append(f"roles/brand/{i}/values/{state}: {', '.join(extra)} not in the profile's brands")
+    for role, brands in profile.get("unavailable", {}).items():
+        if role not in profile.get("roles", {}):
+            errors.append(f"unavailable/{role}: the profile has no {role} rule, so it's unavailable for every brand anyway")
+        if extra := sorted(set(brands) - set(profile["brands"])):
+            errors.append(f"unavailable/{role}: {', '.join(extra)} not in the profile's brands")
     return errors
 
 

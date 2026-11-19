@@ -159,6 +159,53 @@
     "updated": {
       "type": "string",
       "format": "date"
+    },
+    "unavailable": {
+      "description": "Sensors this integration has a rule for but can't provide for some battery brands, because those batteries don't report them through it (e.g. Huawei Solar: SoH only from a SmartLogger, never from a LUNA2000). Role -> brands. Roles the profile has no rule for are unavailable for every brand anyway.",
+      "type": "object",
+      "additionalProperties": false,
+      "properties": {
+        "soh": {
+          "type": "array",
+          "minItems": 1,
+          "uniqueItems": true,
+          "items": {
+            "type": "string",
+            "minLength": 1,
+            "maxLength": 64
+          }
+        },
+        "rated_capacity": {
+          "type": "array",
+          "minItems": 1,
+          "uniqueItems": true,
+          "items": {
+            "type": "string",
+            "minLength": 1,
+            "maxLength": 64
+          }
+        },
+        "charged_energy": {
+          "type": "array",
+          "minItems": 1,
+          "uniqueItems": true,
+          "items": {
+            "type": "string",
+            "minLength": 1,
+            "maxLength": 64
+          }
+        },
+        "discharged_energy": {
+          "type": "array",
+          "minItems": 1,
+          "uniqueItems": true,
+          "items": {
+            "type": "string",
+            "minLength": 1,
+            "maxLength": 64
+          }
+        }
+      }
     }
   },
   "$defs": {

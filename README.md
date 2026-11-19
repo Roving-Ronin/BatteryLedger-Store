@@ -67,6 +67,10 @@ Roles:
   `pack_serial` (one rule per pack position; positions with a serial count as installed, the serial is never
   stored). `brand` names the system's brand; its rule's `values` map each state to the battery brands it can mean
   (e.g. Energy Manager's `fronius` → Fronius, BYD).
+- **`unavailable`** (optional, beside `roles`): sensors the integration has a rule for but can't provide for some
+  battery brands, e.g. `"unavailable": {"soh": ["Huawei", "iStore"]}` for Huawei Solar, where SoH only comes from
+  a SmartLogger. The integration's card then says the sensor isn't available from that integration, instead of
+  asking the user to set it up.
 - **Pre-filling setup:** `install_date`, `install_cost` (first battery group), `install_date_2`, `install_cost_2`
   (batteries added later). A rule's `platform` names a helper's platform (`input_datetime`, `input_number`,
   `input_select`); helpers set up in YAML have their ID as unique ID.

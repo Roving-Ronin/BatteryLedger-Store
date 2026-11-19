@@ -38,3 +38,15 @@ def test_energy_manager_brands_and_install_date():
     p = _profiles()["energy-manager"]
     assert p["brands"] == ["Sigenergy", "AlphaESS", "BYD", "Deye", "Fronius", "GoodWe", "Huawei", "iStore", "Sungrow"]
     assert p["roles"]["install_date"][0]["platform"] == "input_datetime"
+
+
+def test_unavailable_sensors():
+    """Huawei Solar and Energy Manager can't provide SoH for LUNA2000 / IS-BATT; checks on the field."""
+    profiles = _profiles()
+    for pid in ("huawei-solar-wlcrs", "energy-manager"):
+        assert profiles[pid]["unavailable"]["soh"] == ["Huawei", "iStore"]
+    base = profiles["huawei-solar-wlcrs"]
+    assert common.check_profile({**base, "unavailable": {"soh": ["Sungrow"]}})  # not one of its brands
+    deye = profiles["deye-solarman-davidrapan"]
+    assert common.check_profile({**deye, "unavailable": {"soh": ["Deye"]}})  # no SoH rule: already unavailable
+
