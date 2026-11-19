@@ -40,7 +40,7 @@
       "title": "Sungrow SBH datasheet"
     }
   ],
-  "notes": "Stack sizes: SBH100-SBH400 = 2-8 modules of 5.0 kWh, 100% usable. For Sungrow three-phase hybrid inverters. Up to 4 stacks in parallel (SJR combiner), 32 modules, 160 kWh; modules per stack depend on the inverter.",
+  "notes": "Stack sizes: SBH200-SBH400 = 4-8 modules of 5.0 kWh, 100% usable. For Sungrow three-phase hybrid inverters. Up to 4 stacks in parallel (SJR combiner), 32 modules, 160 kWh; modules per stack depend on the inverter.",
   "submitted_by": "Roving-Ronin",
   "verified": false,
   "updated": "2026-11-19"

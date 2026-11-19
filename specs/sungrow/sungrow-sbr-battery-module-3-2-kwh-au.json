@@ -17,7 +17,7 @@
     "unit": "module",
     "nominal_kwh": 3.2,
     "usable_kwh": 3.2,
-    "min_units": 2,
+    "min_units": 3,
     "max_units": 32
   },
   "warranty": {
@@ -45,7 +45,7 @@
       "title": "Sungrow SBR096-SBR256 datasheet (3-8 modules per unit, up to 4 units in parallel)"
     }
   ],
-  "notes": "Stack sizes: SBR064-SBR256 = 2-8 modules of 3.2 kWh, 100% usable. Up to 4 stacks in parallel (SBR combiner), 32 modules: up to 8 modules per stack on three-phase inverters, 7 on single-phase SH-RS inverters with compatible firmware, otherwise 6.",
+  "notes": "Stack sizes: SBR096-SBR256 = 3-8 modules of 3.2 kWh, 100% usable. Up to 4 stacks in parallel (SBR combiner), 32 modules: up to 8 modules per stack on three-phase inverters, 7 on single-phase SH-RS inverters with compatible firmware, otherwise 6.",
   "submitted_by": "Roving-Ronin",
   "verified": false,
   "updated": "2026-11-19"
