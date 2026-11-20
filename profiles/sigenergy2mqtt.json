@@ -1,7 +1,7 @@
 {
   "schema_version": 1,
   "id": "sigenergy2mqtt",
-  "profile_version": 4,
+  "profile_version": 5,
   "name": "sigenergy2mqtt (MQTT)",
   "integration": {
     "platform": "mqtt",
@@ -127,6 +127,36 @@
         "default_entity_ids": [
           "sensor.sigen_0_inverter_1_battery_soc"
         ]
+      }
+    ],
+    "tower_soc": [
+      {
+        "level": "inverter",
+        "unique_id": "{prefix}_{plant}_{inverter}_30601",
+        "default_entity_ids": [
+          "sensor.sigen_0_inverter_1_battery_soc"
+        ],
+        "tower": 1
+      }
+    ],
+    "tower_charged_energy": [
+      {
+        "level": "inverter",
+        "unique_id": "{prefix}_{plant}_{inverter}_30568",
+        "default_entity_ids": [
+          "sensor.sigen_0_inverter_1_accumulated_charge_energy"
+        ],
+        "tower": 1
+      }
+    ],
+    "tower_discharged_energy": [
+      {
+        "level": "inverter",
+        "unique_id": "{prefix}_{plant}_{inverter}_30574",
+        "default_entity_ids": [
+          "sensor.sigen_0_inverter_1_accumulated_discharge_energy"
+        ],
+        "tower": 1
       }
     ]
   },

@@ -1,7 +1,7 @@
 {
   "schema_version": 1,
   "id": "sigen-local-modbus",
-  "profile_version": 4,
+  "profile_version": 5,
   "name": "Sigenergy ESS (TypQxQ Local Modbus)",
   "integration": {
     "platform": "sigen",
@@ -118,6 +118,36 @@
         "default_entity_ids": [
           "sensor.sigen_inverter_battery_state_of_charge"
         ]
+      }
+    ],
+    "tower_soc": [
+      {
+        "level": "inverter",
+        "unique_id": "{entry}_{device}_inverter_ess_battery_soc",
+        "default_entity_ids": [
+          "sensor.sigen_inverter_battery_state_of_charge"
+        ],
+        "tower": 1
+      }
+    ],
+    "tower_charged_energy": [
+      {
+        "level": "inverter",
+        "unique_id": "{entry}_{device}_inverter_ess_accumulated_charge_energy",
+        "default_entity_ids": [
+          "sensor.sigen_inverter_total_charge_energy"
+        ],
+        "tower": 1
+      }
+    ],
+    "tower_discharged_energy": [
+      {
+        "level": "inverter",
+        "unique_id": "{entry}_{device}_inverter_ess_accumulated_discharge_energy",
+        "default_entity_ids": [
+          "sensor.sigen_inverter_total_discharge_energy"
+        ],
+        "tower": 1
       }
     ]
   },

@@ -69,6 +69,9 @@ def load_all_profiles() -> list[tuple[Path, dict]]:
     return [(p, json.loads(p.read_text(encoding="utf-8"))) for p in iter_profile_files()]
 
 
+TOWER_ROLES = {"tower_soc", "tower_charged_energy", "tower_discharged_energy"}
+
+
 def check_profile(profile: dict, path: Path | None = None) -> list[str]:
     errors = [
         f"{'/'.join(str(x) for x in e.absolute_path) or '(root)'}: {e.message}"
@@ -88,6 +91,12 @@ def check_profile(profile: dict, path: Path | None = None) -> list[str]:
                     errors.append(f"roles/{role}/{i}: only the brand role has values")
                 elif extra := sorted(set(brands) - set(profile["brands"])):
                     errors.append(f"roles/brand/{i}/values/{state}: {', '.join(extra)} not in the profile's brands")
+    for role in TOWER_ROLES & set(profile["roles"]):
+        towers = [rule.get("tower") for rule in profile["roles"][role]]
+        if None in towers:
+            errors.append(f"roles/{role}: every rule needs a tower number")
+        elif len(towers) != len(set(towers)):
+            errors.append(f"roles/{role}: each tower number may appear only once")
     for role, brands in profile.get("unavailable", {}).items():
         if role not in profile.get("roles", {}):
             errors.append(f"unavailable/{role}: the profile has no {role} rule, so it's unavailable for every brand anyway")

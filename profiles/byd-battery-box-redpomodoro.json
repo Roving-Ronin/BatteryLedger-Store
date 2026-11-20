@@ -1,7 +1,7 @@
 {
   "schema_version": 1,
   "id": "byd-battery-box-redpomodoro",
-  "profile_version": 3,
+  "profile_version": 4,
   "name": "BYD Battery Box (redpomodoro)",
   "integration": {
     "platform": "byd_battery_box",
@@ -72,6 +72,84 @@
         "default_entity_ids": [
           "sensor.battery_management_unit_state_of_charge"
         ]
+      }
+    ],
+    "tower_soc": [
+      {
+        "level": "inverter",
+        "unique_id": "bydb_bms1_soc",
+        "default_entity_ids": [
+          "sensor.bms_1_state_of_charge"
+        ],
+        "tower": 1
+      },
+      {
+        "level": "inverter",
+        "unique_id": "bydb_bms2_soc",
+        "default_entity_ids": [
+          "sensor.bms_2_state_of_charge"
+        ],
+        "tower": 2
+      },
+      {
+        "level": "inverter",
+        "unique_id": "bydb_bms3_soc",
+        "default_entity_ids": [
+          "sensor.bms_3_state_of_charge"
+        ],
+        "tower": 3
+      }
+    ],
+    "tower_charged_energy": [
+      {
+        "level": "inverter",
+        "unique_id": "bydb_bms1_charge_lfte",
+        "default_entity_ids": [
+          "sensor.bms_1_charge_total_energy"
+        ],
+        "tower": 1
+      },
+      {
+        "level": "inverter",
+        "unique_id": "bydb_bms2_charge_lfte",
+        "default_entity_ids": [
+          "sensor.bms_2_charge_total_energy"
+        ],
+        "tower": 2
+      },
+      {
+        "level": "inverter",
+        "unique_id": "bydb_bms3_charge_lfte",
+        "default_entity_ids": [
+          "sensor.bms_3_charge_total_energy"
+        ],
+        "tower": 3
+      }
+    ],
+    "tower_discharged_energy": [
+      {
+        "level": "inverter",
+        "unique_id": "bydb_bms1_discharge_lfte",
+        "default_entity_ids": [
+          "sensor.bms_1_discharge_total_energy"
+        ],
+        "tower": 1
+      },
+      {
+        "level": "inverter",
+        "unique_id": "bydb_bms2_discharge_lfte",
+        "default_entity_ids": [
+          "sensor.bms_2_discharge_total_energy"
+        ],
+        "tower": 2
+      },
+      {
+        "level": "inverter",
+        "unique_id": "bydb_bms3_discharge_lfte",
+        "default_entity_ids": [
+          "sensor.bms_3_discharge_total_energy"
+        ],
+        "tower": 3
       }
     ]
   },

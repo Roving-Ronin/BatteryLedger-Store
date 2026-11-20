@@ -1,7 +1,7 @@
 {
   "schema_version": 1,
   "id": "deye-solarman-davidrapan",
-  "profile_version": 2,
+  "profile_version": 3,
   "name": "Solarman (davidrapan) for Deye",
   "integration": {
     "platform": "solarman",
@@ -35,6 +35,148 @@
         "unique_id": "{entry}_battery_sensor",
         "default_entity_ids": [
           "sensor.inverter_battery"
+        ]
+      }
+    ],
+    "pack_soh": [
+      {
+        "level": "inverter",
+        "unique_id": "{entry}_battery_1_soh_sensor",
+        "default_entity_ids": [
+          "sensor.inverter_battery_1_soh"
+        ]
+      },
+      {
+        "level": "inverter",
+        "unique_id": "{entry}_battery_2_soh_sensor",
+        "default_entity_ids": [
+          "sensor.inverter_battery_2_soh"
+        ]
+      },
+      {
+        "level": "inverter",
+        "unique_id": "{entry}_battery_3_soh_sensor",
+        "default_entity_ids": [
+          "sensor.inverter_battery_3_soh"
+        ]
+      },
+      {
+        "level": "inverter",
+        "unique_id": "{entry}_battery_4_soh_sensor",
+        "default_entity_ids": [
+          "sensor.inverter_battery_4_soh"
+        ]
+      },
+      {
+        "level": "inverter",
+        "unique_id": "{entry}_battery_5_soh_sensor",
+        "default_entity_ids": [
+          "sensor.inverter_battery_5_soh"
+        ]
+      },
+      {
+        "level": "inverter",
+        "unique_id": "{entry}_battery_6_soh_sensor",
+        "default_entity_ids": [
+          "sensor.inverter_battery_6_soh"
+        ]
+      },
+      {
+        "level": "inverter",
+        "unique_id": "{entry}_battery_7_soh_sensor",
+        "default_entity_ids": [
+          "sensor.inverter_battery_7_soh"
+        ]
+      },
+      {
+        "level": "inverter",
+        "unique_id": "{entry}_battery_8_soh_sensor",
+        "default_entity_ids": [
+          "sensor.inverter_battery_8_soh"
+        ]
+      },
+      {
+        "level": "inverter",
+        "unique_id": "{entry}_battery_9_soh_sensor",
+        "default_entity_ids": [
+          "sensor.inverter_battery_9_soh"
+        ]
+      },
+      {
+        "level": "inverter",
+        "unique_id": "{entry}_battery_10_soh_sensor",
+        "default_entity_ids": [
+          "sensor.inverter_battery_10_soh"
+        ]
+      },
+      {
+        "level": "inverter",
+        "unique_id": "{entry}_battery_11_soh_sensor",
+        "default_entity_ids": [
+          "sensor.inverter_battery_11_soh"
+        ]
+      },
+      {
+        "level": "inverter",
+        "unique_id": "{entry}_battery_12_soh_sensor",
+        "default_entity_ids": [
+          "sensor.inverter_battery_12_soh"
+        ]
+      },
+      {
+        "level": "inverter",
+        "unique_id": "{entry}_battery_13_soh_sensor",
+        "default_entity_ids": [
+          "sensor.inverter_battery_13_soh"
+        ]
+      },
+      {
+        "level": "inverter",
+        "unique_id": "{entry}_battery_14_soh_sensor",
+        "default_entity_ids": [
+          "sensor.inverter_battery_14_soh"
+        ]
+      },
+      {
+        "level": "inverter",
+        "unique_id": "{entry}_battery_15_soh_sensor",
+        "default_entity_ids": [
+          "sensor.inverter_battery_15_soh"
+        ]
+      },
+      {
+        "level": "inverter",
+        "unique_id": "{entry}_battery_16_soh_sensor",
+        "default_entity_ids": [
+          "sensor.inverter_battery_16_soh"
+        ]
+      },
+      {
+        "level": "inverter",
+        "unique_id": "{entry}_battery_17_soh_sensor",
+        "default_entity_ids": [
+          "sensor.inverter_battery_17_soh"
+        ]
+      },
+      {
+        "level": "inverter",
+        "unique_id": "{entry}_battery_18_soh_sensor",
+        "default_entity_ids": [
+          "sensor.inverter_battery_18_soh"
+        ]
+      },
+      {
+        "level": "inverter",
+        "unique_id": "{entry}_battery_19_soh_sensor",
+        "default_entity_ids": [
+          "sensor.inverter_battery_19_soh"
+        ]
+      },
+      {
+        "level": "inverter",
+        "unique_id": "{entry}_battery_20_soh_sensor",
+        "default_entity_ids": [
+          "sensor.inverter_battery_20_soh"
         ]
       }
     ]

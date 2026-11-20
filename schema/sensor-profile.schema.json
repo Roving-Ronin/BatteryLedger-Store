@@ -146,6 +146,22 @@
         "pack_serial": {
           "$ref": "#/$defs/inverter_rules",
           "description": "One rule per battery pack position on an inverter; positions with a serial number are counted as installed modules. The serial itself is never stored."
+        },
+        "pack_soh": {
+          "$ref": "#/$defs/inverter_rules",
+          "description": "One rule per battery pack: each pack's own state of health (%), from its BMS. Where the integration has no whole-battery SoH, BatteryLedger shows the average of the packs that report one."
+        },
+        "tower_soc": {
+          "$ref": "#/$defs/inverter_rules",
+          "description": "One rule per battery tower (stack), with `tower`: that tower's own state of charge (%). With the tower's charged and/or discharged energy, BatteryLedger measures each tower's usable capacity."
+        },
+        "tower_charged_energy": {
+          "$ref": "#/$defs/inverter_rules",
+          "description": "One rule per battery tower (stack), with `tower`: that tower's lifetime charged energy."
+        },
+        "tower_discharged_energy": {
+          "$ref": "#/$defs/inverter_rules",
+          "description": "One rule per battery tower (stack), with `tower`: that tower's lifetime discharged energy."
         }
       }
     },
@@ -338,7 +354,7 @@
             "pattern": "^[a-z0-9_]+$"
           },
           "tower": {
-            "description": "For pack_serial: which battery tower (stack) on the inverter this pack position is in, counted from 1. Detect then offers one battery group per tower. Leave out when the integration doesn't tell towers apart.",
+            "description": "Which battery tower (stack) on the inverter, counted from 1. Required for tower_soc / tower_charged_energy / tower_discharged_energy. For pack_serial: the tower this pack position is in, so Detect can offer one battery group per tower. Leave out when the integration doesn't tell towers apart.",
             "type": "integer",
             "minimum": 1,
             "maximum": 8
