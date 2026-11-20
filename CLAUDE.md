@@ -47,6 +47,10 @@ CodeQL) on pushes, PRs and weekly.
 - Field naming: `series` is shown to users as **Model** (product line, e.g. SigenStor, Neo); `model` is
   shown as **Battery module** (e.g. SigenStor BAT 8.0).
 - Specs sort brand → model line → battery module, numbers largest first (`build_index.natural_key`).
+- **SoH coverage is shown in BatteryLedger**: its SoH sensor help text names the brands and integrations without
+  an SoH sensor. When a new brand, battery or sensor profile is added, or a profile gains (or is marked
+  `unavailable` for) an `soh` role, say so in the PR so BatteryLedger's text and its
+  `test_soh_help_text_matches_the_store` are updated with the next snapshot.
 - Sensor profiles list their brands explicitly (no wildcard). An integration for several brands (Energy
   Manager) lists each one and must be updated when a brand is added. On the site, Sigenergy comes first,
   then the other brands alphabetically; profiles offered for every brand come last.
