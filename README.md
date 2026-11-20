@@ -63,6 +63,13 @@ Roles:
 - **Sensors:** `discharged_energy`, `charged_energy`, `rated_capacity`, `soh`, `soc` (the whole battery's state of
   charge, used to measure usable capacity), and per-module
   `module_discharged_energy`, `module_charged_energy`, `module_rated_capacity`, `module_soc`, `module_soh`.
+- **Per tower** (level `inverter`, every match kept, each rule with its `tower` number): `tower_soc`,
+  `tower_charged_energy` and `tower_discharged_energy`, so BatteryLedger can measure each tower's (stack's) usable
+  capacity. One tower per inverter for Sigenergy, up to two battery units per inverter for Huawei, up to three
+  towers for BYD HVS/HVM. Only add these where the integration gives each tower its own energy counters (GoodWe's
+  and Deye's second battery have SoC and power only).
+- **`pack_soh`** (level `inverter`, one rule per pack): each battery pack's own SoH from its BMS (e.g. Deye P3 on
+  Solarman, up to 20 packs). Where there's no whole-battery `soh`, BatteryLedger shows the packs' average.
 - **Suggesting the battery** (setup's *Detect*): `module_count` and `tower_count`, and per inverter (level
   `inverter`, every match kept) `inverter_model`, `inverter_pack_count`, `inverter_rated_capacity` and
   `pack_serial` (one rule per pack position; positions with a serial count as installed, the serial is never

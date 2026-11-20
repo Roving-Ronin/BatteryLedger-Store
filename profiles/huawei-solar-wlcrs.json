@@ -1,7 +1,7 @@
 {
   "schema_version": 1,
   "id": "huawei-solar-wlcrs",
-  "profile_version": 6,
+  "profile_version": 7,
   "name": "Huawei Solar (wlcrs)",
   "integration": {
     "platform": "huawei_solar",
@@ -131,6 +131,60 @@
         "default_entity_ids": [
           "sensor.batteries_state_of_capacity"
         ]
+      }
+    ],
+    "tower_soc": [
+      {
+        "level": "inverter",
+        "unique_id": "{serial}_storage_unit_1_state_of_capacity",
+        "default_entity_ids": [
+          "sensor.battery_1_state_of_capacity"
+        ],
+        "tower": 1
+      },
+      {
+        "level": "inverter",
+        "unique_id": "{serial}_storage_unit_2_state_of_capacity",
+        "default_entity_ids": [
+          "sensor.battery_2_state_of_capacity"
+        ],
+        "tower": 2
+      }
+    ],
+    "tower_charged_energy": [
+      {
+        "level": "inverter",
+        "unique_id": "{serial}_storage_unit_1_total_charge",
+        "default_entity_ids": [
+          "sensor.battery_1_total_charge"
+        ],
+        "tower": 1
+      },
+      {
+        "level": "inverter",
+        "unique_id": "{serial}_storage_unit_2_total_charge",
+        "default_entity_ids": [
+          "sensor.battery_2_total_charge"
+        ],
+        "tower": 2
+      }
+    ],
+    "tower_discharged_energy": [
+      {
+        "level": "inverter",
+        "unique_id": "{serial}_storage_unit_1_total_discharge",
+        "default_entity_ids": [
+          "sensor.battery_1_total_discharge"
+        ],
+        "tower": 1
+      },
+      {
+        "level": "inverter",
+        "unique_id": "{serial}_storage_unit_2_total_discharge",
+        "default_entity_ids": [
+          "sensor.battery_2_total_discharge"
+        ],
+        "tower": 2
       }
     ]
   },

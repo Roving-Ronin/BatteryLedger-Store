@@ -50,3 +50,12 @@ def test_unavailable_sensors():
     deye = profiles["deye-solarman-davidrapan"]
     assert common.check_profile({**deye, "unavailable": {"soh": ["Deye"]}})  # no SoH rule: already unavailable
 
+
+
+def test_tower_roles_need_a_tower_number():
+    p = copy.deepcopy(_profiles()["huawei-solar-wlcrs"])
+    del p["roles"]["tower_soc"][1]["tower"]
+    assert any("tower number" in e for e in common.check_profile(p))
+    p = copy.deepcopy(_profiles()["huawei-solar-wlcrs"])
+    p["roles"]["tower_soc"][1]["tower"] = 1
+    assert any("only once" in e for e in common.check_profile(p))
