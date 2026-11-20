@@ -1,7 +1,7 @@
 {
   "schema_version": 1,
   "id": "huawei-solar-wlcrs",
-  "profile_version": 5,
+  "profile_version": 6,
   "name": "Huawei Solar (wlcrs)",
   "integration": {
     "platform": "huawei_solar",
@@ -123,6 +123,15 @@
         "unique_id": "{serial}_storage_unit_2_battery_pack_3_serial_number",
         "tower": 2
       }
+    ],
+    "soc": [
+      {
+        "level": "inverter",
+        "unique_id": "{serial}_storage_state_of_capacity",
+        "default_entity_ids": [
+          "sensor.batteries_state_of_capacity"
+        ]
+      }
     ]
   },
   "unavailable": {
@@ -133,5 +142,5 @@
   },
   "submitted_by": "Roving-Ronin",
   "verified": false,
-  "updated": "2026-11-19"
+  "updated": "2026-11-20"
 }

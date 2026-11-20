@@ -1,7 +1,7 @@
 {
   "schema_version": 1,
   "id": "energy-manager",
-  "profile_version": 8,
+  "profile_version": 9,
   "name": "Energy Manager",
   "integration": {
     "platform": "mqtt",
@@ -139,6 +139,15 @@
           "input_number.battery_install_cost_2"
         ]
       }
+    ],
+    "soc": [
+      {
+        "level": "plant",
+        "unique_id": "inverter_battery_level_mqtt",
+        "default_entity_ids": [
+          "sensor.inverter_battery_level"
+        ]
+      }
     ]
   },
   "unavailable": {
@@ -149,5 +158,5 @@
   },
   "submitted_by": "Roving-Ronin",
   "verified": false,
-  "updated": "2026-11-19"
+  "updated": "2026-11-20"
 }

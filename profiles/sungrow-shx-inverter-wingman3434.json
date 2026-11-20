@@ -1,7 +1,7 @@
 {
   "schema_version": 1,
   "id": "sungrow-shx-inverter-wingman3434",
-  "profile_version": 1,
+  "profile_version": 2,
   "name": "Sungrow SHx Inverter (Wingman3434)",
   "integration": {
     "platform": "sungrow_shx_inverter",
@@ -46,9 +46,18 @@
           "sensor.sungrow_shx_inverter_<model>_battery_state_of_health"
         ]
       }
+    ],
+    "soc": [
+      {
+        "level": "plant",
+        "unique_id": "{serial}_battery_level",
+        "default_entity_ids": [
+          "sensor.sungrow_shx_inverter_<model>_battery_level"
+        ]
+      }
     ]
   },
   "submitted_by": "Roving-Ronin",
   "verified": false,
-  "updated": "2026-11-17"
+  "updated": "2026-11-20"
 }

@@ -1,7 +1,7 @@
 {
   "schema_version": 1,
   "id": "goodwe",
-  "profile_version": 1,
+  "profile_version": 2,
   "name": "GoodWe (Home Assistant core, or mletenay's custom version)",
   "integration": {
     "platform": "goodwe",
@@ -37,9 +37,18 @@
           "sensor.goodwe_battery_state_of_health"
         ]
       }
+    ],
+    "soc": [
+      {
+        "level": "plant",
+        "unique_id": "goodwe-battery_soc-{serial}",
+        "default_entity_ids": [
+          "sensor.goodwe_battery_state_of_charge"
+        ]
+      }
     ]
   },
   "submitted_by": "Roving-Ronin",
   "verified": false,
-  "updated": "2026-11-18"
+  "updated": "2026-11-20"
 }
