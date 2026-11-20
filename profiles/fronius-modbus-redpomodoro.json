@@ -1,7 +1,7 @@
 {
   "schema_version": 1,
   "id": "fronius-modbus-redpomodoro",
-  "profile_version": 1,
+  "profile_version": 2,
   "name": "Fronius Modbus (redpomodoro)",
   "integration": {
     "platform": "fronius_modbus",
@@ -38,9 +38,18 @@
           "sensor.<battery_model>_capacity"
         ]
       }
+    ],
+    "soc": [
+      {
+        "level": "plant",
+        "unique_id": "fm_soc",
+        "default_entity_ids": [
+          "sensor.<battery_model>_state_of_charge"
+        ]
+      }
     ]
   },
   "submitted_by": "Roving-Ronin",
   "verified": false,
-  "updated": "2026-11-18"
+  "updated": "2026-11-20"
 }

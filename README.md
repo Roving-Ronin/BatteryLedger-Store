@@ -60,7 +60,8 @@ Sensors are matched by their **entity registry unique ID**, never by entity ID (
 | `roles.<role>` | Matching rules in order of preference, each with a `level` (`plant`, `inverter` or `module`), a `unique_id` template (used for matching) and `default_entity_ids` (the entity IDs the integration creates by default, newest first; shown on the Store site) |
 
 Roles:
-- **Sensors:** `discharged_energy`, `charged_energy`, `rated_capacity`, `soh`, and per-module
+- **Sensors:** `discharged_energy`, `charged_energy`, `rated_capacity`, `soh`, `soc` (the whole battery's state of
+  charge, used to measure usable capacity), and per-module
   `module_discharged_energy`, `module_charged_energy`, `module_rated_capacity`, `module_soc`, `module_soh`.
 - **Suggesting the battery** (setup's *Detect*): `module_count` and `tower_count`, and per inverter (level
   `inverter`, every match kept) `inverter_model`, `inverter_pack_count`, `inverter_rated_capacity` and
@@ -83,6 +84,29 @@ setup ID, station ID or serial number: `{entry}`, `{device}`, `{prefix}`, `{plan
 Seeded profiles: TypQxQ's [Sigenergy Local Modbus](https://github.com/TypQxQ/Sigenergy-Local-Modbus)
 (`sigen`) and [sigenergy2mqtt](https://github.com/seud0nym/sigenergy2mqtt) (`mqtt`, including the optional
 Sigen Cloud per-module sensors).
+
+## Wanted sensor profiles
+
+Integrations with home batteries that don't have a sensor profile yet. A profile needs the integration's
+lifetime battery charge and discharge counters, and where it has them rated capacity, state of health and
+state of charge, with `unique_id` templates taken from the integration's source code (see Sensor profiles above).
+
+| Brand | Home Assistant integration |
+|---|---|
+| Growatt | `growatt_server` (cloud), Growatt local / Modbus |
+| Sofar | Solarman, SolaX Modbus |
+| SolaX | SolaX Modbus |
+| Victron | Victron (GX / Modbus) |
+| GivEnergy | GivEnergy Local |
+| Fox ESS | Fox ESS Modbus |
+| Solis | Solis Modbus |
+| SolarEdge | SolarEdge Modbus Multi |
+| Tesla Powerwall | Tesla Fleet / Teslemetry / Powerwall |
+| Enphase IQ Battery | Enphase Envoy |
+| EcoFlow | EcoFlow |
+
+Until a profile exists, BatteryLedger can still find the battery's counters from Home Assistant's Energy
+dashboard. (List based on the integrations Energy Pilot, MIT licensed, supports.)
 
 ## Maintainer notes
 

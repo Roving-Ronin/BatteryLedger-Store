@@ -1,7 +1,7 @@
 {
   "schema_version": 1,
   "id": "sungrow-shx-modbus-mkaiser",
-  "profile_version": 1,
+  "profile_version": 2,
   "name": "Sungrow SHx Modbus (mkaiser YAML package)",
   "integration": {
     "platform": "modbus",
@@ -46,9 +46,18 @@
           "sensor.battery_state_of_health"
         ]
       }
+    ],
+    "soc": [
+      {
+        "level": "plant",
+        "unique_id": "sg_battery_level",
+        "default_entity_ids": [
+          "sensor.battery_level"
+        ]
+      }
     ]
   },
   "submitted_by": "Roving-Ronin",
   "verified": false,
-  "updated": "2026-11-17"
+  "updated": "2026-11-20"
 }
